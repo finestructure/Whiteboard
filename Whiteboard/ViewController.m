@@ -14,21 +14,48 @@
 
 @implementation ViewController
 
+
+#pragma mark - Touch event handling
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+  NSLog(@"touch began: %@", event);
+}
+
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+  NSLog(@"touch moved: %@", event);
+}
+
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+  NSLog(@"touch ended: %@", event);
+}
+
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+  NSLog(@"touch cancelled: %@", event);
+}
+
+
+#pragma mark - Init and view lifecycle
+
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+  [super viewDidLoad];
 }
+
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+  [super viewDidUnload];
 }
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
   return YES;
 }
+
 
 @end
