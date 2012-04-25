@@ -1,0 +1,3 @@
+[submodule "Vendor/cocos2d-iphone"]
+	path = Vendor/cocos2d-iphone
+	url = git://github.com/cocos2d/cocos2d-iphone.git
