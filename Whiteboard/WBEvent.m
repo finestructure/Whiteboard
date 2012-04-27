@@ -21,7 +21,7 @@
   self = [super initWithNewDocumentInDatabase:[Database sharedInstance].database];
   if (self) {
     self.type = @"event";
-    self.index = [NSNumber numberWithUnsignedInteger:[[Globals sharedInstance] nextSequenceId]];
+    self.index = [NSString stringWithFormat:@"%020d", [[Globals sharedInstance] nextSequenceId]];
     self.position = [touch locationInView:touch.view];
     self.phase = [NSNumber numberWithUnsignedInteger:touch.phase];
   }

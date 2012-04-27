@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) NSNumber *x;
 @property (nonatomic, copy) NSNumber *y;
-@property (nonatomic, copy) NSNumber *index;
+@property (nonatomic, copy) NSString *index;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSNumber *phase;
 
