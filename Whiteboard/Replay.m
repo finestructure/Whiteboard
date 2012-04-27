@@ -83,7 +83,7 @@ typedef struct _LineVertex {
     CouchQueryRow *row;
     while ((row = rows.nextRow)) {
       WBEvent *event = [WBEvent modelForDocument:row.document];
-      NSLog(@"processing event %d", [event.index unsignedIntegerValue]);
+      NSLog(@"processing event %@", event.index);
       [self processEvent:event];
     }
   }
@@ -420,10 +420,12 @@ typedef struct _LineVertex {
   CGPoint point = [self getPoint:event];
   //TODO: vary size
   [self endLineAt:point withSize:_kWidth];
+  [self draw];
 }
 
 
 - (void)touchCancelled:(WBEvent *)event {
+  [self draw];
 }
 
 
