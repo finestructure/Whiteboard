@@ -25,7 +25,6 @@
 		5A130B53154A906500A16684 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B52154A906500A16684 /* AVFoundation.framework */; };
 		5A130B55154A908600A16684 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B54154A908600A16684 /* QuartzCore.framework */; };
 		5A130B59154A90B900A16684 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B58154A90B900A16684 /* libz.dylib */; };
-		5A130C48154A9E2C00A16684 /* CCNode+SFGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130B5C154A9E2C00A16684 /* CCNode+SFGestureRecognizers.m */; };
 		5A130C49154A9E2C00A16684 /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130B5F154A9E2C00A16684 /* CCAction.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5A130C4A154A9E2C00A16684 /* CCActionCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130B61154A9E2C00A16684 /* CCActionCamera.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5A130C4B154A9E2C00A16684 /* CCActionEase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130B63154A9E2C00A16684 /* CCActionEase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -164,8 +163,6 @@
 		5A130B54154A908600A16684 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5A130B56154A90A700A16684 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		5A130B58154A90B900A16684 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		5A130B5B154A9E2C00A16684 /* CCNode+SFGestureRecognizers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+SFGestureRecognizers.h"; sourceTree = "<group>"; };
-		5A130B5C154A9E2C00A16684 /* CCNode+SFGestureRecognizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+SFGestureRecognizers.m"; sourceTree = "<group>"; };
 		5A130B5E154A9E2C00A16684 /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
 		5A130B5F154A9E2C00A16684 /* CCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAction.m; sourceTree = "<group>"; };
 		5A130B60154A9E2C00A16684 /* CCActionCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionCamera.h; sourceTree = "<group>"; };
@@ -508,22 +505,11 @@
 		5A1305A21548482A00A16684 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				5A130B5A154A9E2C00A16684 /* CCNode+SFGestureRecognizers */,
 				5A130B5D154A9E2C00A16684 /* cocos2d */,
 				5A130C1B154A9E2C00A16684 /* CocosDenshion */,
 				5A130C25154A9E2C00A16684 /* kazmath */,
 			);
 			name = Vendor;
-			sourceTree = "<group>";
-		};
-		5A130B5A154A9E2C00A16684 /* CCNode+SFGestureRecognizers */ = {
-			isa = PBXGroup;
-			children = (
-				5A130B5B154A9E2C00A16684 /* CCNode+SFGestureRecognizers.h */,
-				5A130B5C154A9E2C00A16684 /* CCNode+SFGestureRecognizers.m */,
-			);
-			name = "CCNode+SFGestureRecognizers";
-			path = "libs/CCNode+SFGestureRecognizers";
 			sourceTree = "<group>";
 		};
 		5A130B5D154A9E2C00A16684 /* cocos2d */ = {
@@ -956,7 +942,6 @@
 				5A13053A154836D900A16684 /* main.m in Sources */,
 				5A13053E154836D900A16684 /* AppDelegate.m in Sources */,
 				5A13069D1548548F00A16684 /* LineDrawer.m in Sources */,
-				5A130C48154A9E2C00A16684 /* CCNode+SFGestureRecognizers.m in Sources */,
 				5A130C49154A9E2C00A16684 /* CCAction.m in Sources */,
 				5A130C4A154A9E2C00A16684 /* CCActionCamera.m in Sources */,
 				5A130C4B154A9E2C00A16684 /* CCActionEase.m in Sources */,

@@ -28,7 +28,6 @@
 
 #import "CCRenderTextureWithDepth.h"
 #import "LineDrawer.h"
-#import "CCNode+SFGestureRecognizers.h"
 
 
 float kWidth = 2;
