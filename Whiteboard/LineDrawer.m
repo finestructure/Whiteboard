@@ -28,6 +28,9 @@
 #import "CCNode+SFGestureRecognizers.h"
 
 
+float kWidth = 2;
+float kOverdraw = 1;
+
 typedef struct _LineVertex {
   CGPoint pos;
   float z;
@@ -158,7 +161,7 @@ typedef struct _LineVertex {
     circlesPoints = [NSMutableArray array];
 
     shaderProgram_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
-    overdraw = 3.0f;
+    overdraw = kOverdraw;
 
     renderTexture = [[CCRenderTextureWithDepth alloc] initWithWidth:(int)self.contentSize.width height:(int)self.contentSize.height andDepthFormat:GL_DEPTH_COMPONENT24_OES];
     renderTexture.anchorPoint = ccp(0, 0);
@@ -493,10 +496,9 @@ typedef struct _LineVertex {
   [points removeAllObjects];
   [velocities removeAllObjects];
   
-  float size = 3;
-  [self startNewLineFrom:point withSize:size];
-  [self addPoint:point withSize:size];
-  [self addPoint:point withSize:size];
+  [self startNewLineFrom:point withSize:kWidth];
+  [self addPoint:point withSize:kWidth];
+  [self addPoint:point withSize:kWidth];
   
   return YES;
 }
@@ -513,16 +515,14 @@ typedef struct _LineVertex {
     }
   }
   //TODO: vary size
-  float size = 3;
-  [self addPoint:point withSize:size];
+  [self addPoint:point withSize:kWidth];
 }
 
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
   CGPoint point = [self getPoint:touch];
   //TODO: vary size
-  float size = 3;
-  [self endLineAt:point withSize:size];
+  [self endLineAt:point withSize:kWidth];
 }
 
 
