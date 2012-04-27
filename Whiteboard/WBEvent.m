@@ -6,21 +6,20 @@
 //  Copyright (c) 2012 abstracture GmbH & Co. KG. All rights reserved.
 //
 
-#import "CouchPoint.h"
+#import "WBEvent.h"
 
 #import "Globals.h"
 
-@implementation CouchPoint
+@implementation WBEvent
 
-@dynamic x, y, w, index, type, version;
+@dynamic x, y, index, type, state;
 
 
 - (id)initWithNewDocumentInDatabase:(CouchDatabase *)database
 {
   self = [super initWithNewDocumentInDatabase:database];
   if (self) {
-    self.type = @"point";
-    self.version = [[Globals sharedInstance] version];
+    self.type = @"event";
   }
   return self;
 }
@@ -36,15 +35,6 @@
   CGPoint p = CGPointMake([self.x doubleValue], [self.y doubleValue]);
   return p;
 }
-
-
-- (void)setWidth:(float)width {
-  self.w = [NSNumber numberWithFloat:width];
-}
-
-
-- (float)width {
-  return [self.w floatValue];
 }
 
 

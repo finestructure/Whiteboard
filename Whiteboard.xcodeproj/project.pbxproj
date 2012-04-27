@@ -133,7 +133,7 @@
 		5A130CCF154AD93B00A16684 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CCD154AD93B00A16684 /* TouchDB.framework */; };
 		5A130CD1154ADA5B00A16684 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CD0154ADA5B00A16684 /* libsqlite3.dylib */; };
 		5A130CD3154ADA6F00A16684 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */; };
-		5A130CDB154ADD3E00A16684 /* CouchPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDA154ADD3E00A16684 /* CouchPoint.m */; };
+		5A130CDB154ADD3E00A16684 /* WBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDA154ADD3E00A16684 /* WBEvent.m */; };
 		5A130CDE154AE26100A16684 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDD154AE26000A16684 /* GCD.m */; };
 /* End PBXBuildFile section */
 
@@ -410,8 +410,8 @@
 		5A130CCD154AD93B00A16684 /* TouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchDB.framework; path = Vendor/TouchDB.framework; sourceTree = "<group>"; };
 		5A130CD0154ADA5B00A16684 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		5A130CD9154ADD3E00A16684 /* CouchPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchPoint.h; sourceTree = "<group>"; };
-		5A130CDA154ADD3E00A16684 /* CouchPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchPoint.m; sourceTree = "<group>"; };
+		5A130CD9154ADD3E00A16684 /* WBEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; path = WBEvent.h; sourceTree = "<group>"; };
+		5A130CDA154ADD3E00A16684 /* WBEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBEvent.m; sourceTree = "<group>"; };
 		5A130CDC154AE26000A16684 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
 		5A130CDD154AE26000A16684 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -879,8 +879,8 @@
 		5A130CD8154ADD2600A16684 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5A130CD9154ADD3E00A16684 /* CouchPoint.h */,
-				5A130CDA154ADD3E00A16684 /* CouchPoint.m */,
+				5A130CD9154ADD3E00A16684 /* WBEvent.h */,
+				5A130CDA154ADD3E00A16684 /* WBEvent.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1098,7 +1098,7 @@
 				5A130CC5154AD82F00A16684 /* Database.m in Sources */,
 				5A130CC8154AD84600A16684 /* Configuration.m in Sources */,
 				5A130CCB154AD86000A16684 /* Globals.m in Sources */,
-				5A130CDB154ADD3E00A16684 /* CouchPoint.m in Sources */,
+				5A130CDB154ADD3E00A16684 /* WBEvent.m in Sources */,
 				5A130CDE154AE26100A16684 /* GCD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
