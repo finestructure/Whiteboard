@@ -27,11 +27,13 @@
 #import "LineDrawer.h"
 #import "CCNode+SFGestureRecognizers.h"
 
+
 typedef struct _LineVertex {
   CGPoint pos;
   float z;
   ccColor4F color;
 } LineVertex;
+
 
 @interface LinePoint : NSObject
 @property(nonatomic, assign) CGPoint pos;
@@ -44,19 +46,6 @@ typedef struct _LineVertex {
 @synthesize width;
 @end
 
-@interface LineDrawer ()
-
-- (void)fillLineTriangles:(LineVertex *)vertices count:(NSUInteger)count withColor:(ccColor4F)color;
-
-- (void)startNewLineFrom:(CGPoint)newPoint withSize:(CGFloat)aSize;
-
-- (void)endLineAt:(CGPoint)aEndPoint withSize:(CGFloat)aSize;
-
-- (void)addPoint:(CGPoint)newPoint withSize:(CGFloat)size;
-
-- (void)drawLines:(NSArray *)linePoints withColor:(ccColor4F)color;
-
-@end
 
 @interface CCRenderTextureWithDepth : CCRenderTexture
 - (id)initWithWidth:(int)w height:(int)h andDepthFormat:(GLint)depthFormat;
