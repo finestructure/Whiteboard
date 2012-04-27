@@ -168,12 +168,8 @@ typedef struct _LineVertex {
 
     self.isTouchEnabled = YES;
 
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    panGestureRecognizer.maximumNumberOfTouches = 1;
-    [self addGestureRecognizer:panGestureRecognizer];
-
-    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    [self addGestureRecognizer:longPressGestureRecognizer];
+//    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+//    [self addGestureRecognizer:longPressGestureRecognizer];
   }
   return self;
 }
@@ -460,41 +456,6 @@ typedef struct _LineVertex {
   return size;
 }
 
-- (void)handlePanGesture:(UIPanGestureRecognizer *)panGestureRecognizer
-{
-  const CGPoint point = [[CCDirector sharedDirector] convertToGL:[panGestureRecognizer locationInView:panGestureRecognizer.view]];
-
-  if (panGestureRecognizer.state == UIGestureRecognizerStateBegan) {
-    [points removeAllObjects];
-    [velocities removeAllObjects];
-
-    float size = [self extractSize:panGestureRecognizer];
-
-    [self startNewLineFrom:point withSize:size];
-    [self addPoint:point withSize:size];
-    [self addPoint:point withSize:size];
-  }
-
-  if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
-    //! skip points that are too close
-    float eps = 1.5f;
-    if ([points count] > 0) {
-      float length = ccpLength(ccpSub([(LinePoint *)[points lastObject] pos], point));
-
-      if (length < eps) {
-        return;
-      } else {
-      }
-    }
-    float size = [self extractSize:panGestureRecognizer];
-    [self addPoint:point withSize:size];
-  }
-
-  if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
-    float size = [self extractSize:panGestureRecognizer];
-    [self endLineAt:point withSize:size];
-  }
-}
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPressGestureRecognizer
 {
@@ -503,4 +464,71 @@ typedef struct _LineVertex {
   glClear(GL_DEPTH_BUFFER_BIT);
   [renderTexture end];
 }
+
+
+#pragma mark - Touch event handling
+
+
+- (void)onEnter
+{
+  [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+  [super onEnter];
+}
+
+- (void)onExit
+{
+  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+  [super onExit];
+}   
+
+
+- (CGPoint)getPoint:(UITouch *)touch {
+  return [[CCDirector sharedDirector] convertToGL:[touch locationInView:touch.view]];
+}
+
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+  CGPoint point = [self getPoint:touch];
+  
+  [points removeAllObjects];
+  [velocities removeAllObjects];
+  
+  float size = 3;
+  [self startNewLineFrom:point withSize:size];
+  [self addPoint:point withSize:size];
+  [self addPoint:point withSize:size];
+  
+  return YES;
+}
+
+
+- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+  CGPoint point = [self getPoint:touch];
+  float eps = 1.5f;
+  if ([points count] > 0) {
+    float length = ccpLength(ccpSub([(LinePoint *)[points lastObject] pos], point));
+    
+    if (length < eps) {
+      return;
+    }
+  }
+  //TODO: vary size
+  float size = 3;
+  [self addPoint:point withSize:size];
+}
+
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+  CGPoint point = [self getPoint:touch];
+  //TODO: vary size
+  float size = 3;
+  [self endLineAt:point withSize:size];
+}
+
+
+- (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
+  
+}
+
+
 @end
