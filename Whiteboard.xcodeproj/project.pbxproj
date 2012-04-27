@@ -13,8 +13,6 @@
 		5A130538154836D900A16684 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A130536154836D900A16684 /* InfoPlist.strings */; };
 		5A13053A154836D900A16684 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130539154836D900A16684 /* main.m */; };
 		5A13053E154836D900A16684 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A13053D154836D900A16684 /* AppDelegate.m */; };
-		5A130541154836D900A16684 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A13053F154836D900A16684 /* MainStoryboard.storyboard */; };
-		5A130544154836D900A16684 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130543154836D900A16684 /* ViewController.m */; };
 		5A13054C154836D900A16684 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13054B154836D900A16684 /* SenTestingKit.framework */; };
 		5A13054D154836D900A16684 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13052D154836D900A16684 /* UIKit.framework */; };
 		5A13054E154836D900A16684 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13052F154836D900A16684 /* Foundation.framework */; };
@@ -150,9 +148,6 @@
 		5A13053B154836D900A16684 /* Whiteboard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Whiteboard-Prefix.pch"; sourceTree = "<group>"; };
 		5A13053C154836D900A16684 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A13053D154836D900A16684 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5A130540154836D900A16684 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		5A130542154836D900A16684 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5A130543154836D900A16684 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5A13054A154836D900A16684 /* WhiteboardTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhiteboardTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A13054B154836D900A16684 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		5A130553154836D900A16684 /* WhiteboardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WhiteboardTests-Info.plist"; sourceTree = "<group>"; };
@@ -468,9 +463,6 @@
 			children = (
 				5A13053C154836D900A16684 /* AppDelegate.h */,
 				5A13053D154836D900A16684 /* AppDelegate.m */,
-				5A13053F154836D900A16684 /* MainStoryboard.storyboard */,
-				5A130542154836D900A16684 /* ViewController.h */,
-				5A130543154836D900A16684 /* ViewController.m */,
 				5A130534154836D900A16684 /* Supporting Files */,
 				5A13069B1548548F00A16684 /* LineDrawer.h */,
 				5A13069C1548548F00A16684 /* LineDrawer.m */,
@@ -920,7 +912,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A130538154836D900A16684 /* InfoPlist.strings in Resources */,
-				5A130541154836D900A16684 /* MainStoryboard.storyboard in Resources */,
 				5A130A8D15485A5C00A16684 /* ChangeLog in Resources */,
 				5A130A8E15485A5C00A16684 /* CMakeLists.txt in Resources */,
 			);
@@ -959,7 +950,6 @@
 			files = (
 				5A13053A154836D900A16684 /* main.m in Sources */,
 				5A13053E154836D900A16684 /* AppDelegate.m in Sources */,
-				5A130544154836D900A16684 /* ViewController.m in Sources */,
 				5A13069D1548548F00A16684 /* LineDrawer.m in Sources */,
 				5A130A3715485A5C00A16684 /* CCNode+SFGestureRecognizers.m in Sources */,
 				5A130A3815485A5C00A16684 /* CCAction.m in Sources */,
@@ -1087,14 +1077,6 @@
 				5A130537154836D900A16684 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		5A13053F154836D900A16684 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5A130540154836D900A16684 /* en */,
-			);
-			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		5A130554154836D900A16684 /* InfoPlist.strings */ = {
