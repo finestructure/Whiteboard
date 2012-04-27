@@ -14,6 +14,7 @@
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
+#import "Database.h"
 #import "LineDrawer.h"
 
 @interface AppDelegate () {
@@ -100,7 +101,12 @@
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
   CCScene *scene = [CCScene node];
   [scene addChild:[LineDrawer node]];
-	[[CCDirector sharedDirector] pushScene: scene]; 
+	[[CCDirector sharedDirector] pushScene: scene];
+  
+  NSError *error = nil;
+  if (! [[Database sharedInstance] connect:&error]) {
+    NSLog(@"Failed to connect to database: %@", [error localizedDescription]);
+  }
   
 	return YES;
 }
