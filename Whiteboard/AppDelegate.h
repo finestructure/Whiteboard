@@ -10,12 +10,7 @@
 #import "cocos2d.h"
 
 @interface AppDelegate : NSObject <UIApplicationDelegate, CCDirectorDelegate>
-{
-	UIWindow *window_;  
-	CCDirectorIOS	*__unsafe_unretained director_;							// weak ref
-}
 
 @property (nonatomic, retain) UIWindow *window;
-@property (unsafe_unretained, readonly) CCDirectorIOS *director;
 
 @end

@@ -16,18 +16,24 @@
 #import "AppDelegate.h"
 #import "LineDrawer.h"
 
+@interface AppDelegate () {
+  __weak CCDirectorIOS *_director;
+}
+
+@end
+
 @implementation AppDelegate
 
-@synthesize window=window_, director=director_;
+@synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// Create the main window
-	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
   
 	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
-	CCGLView *glView = [CCGLView viewWithFrame:[window_ bounds]
+	CCGLView *glView = [CCGLView viewWithFrame:[self.window bounds]
                                  pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
                                  depthFormat:0	//GL_DEPTH_COMPONENT24_OES
                           preserveBackbuffer:NO
@@ -35,32 +41,32 @@
                                multiSampling:NO
                              numberOfSamples:0];
   
-	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
+	_director = (CCDirectorIOS*) [CCDirector sharedDirector];
   
-	director_.wantsFullScreenLayout = YES;
+	_director.wantsFullScreenLayout = YES;
   
 	// Display FSP and SPF
-	[director_ setDisplayStats:YES];
+	[_director setDisplayStats:YES];
   
 	// set FPS at 60
-	[director_ setAnimationInterval:1.0/60];
+	[_director setAnimationInterval:1.0/60];
   
 	// attach the openglView to the director
-	[director_ setView:glView];
+	[_director setView:glView];
   
 	// for rotation and other messages
-	[director_ setDelegate:self];
+	[_director setDelegate:self];
   
 	// 2D projection
-	[director_ setProjection:kCCDirectorProjection2D];
+	[_director setProjection:kCCDirectorProjection2D];
   //	[director setProjection:kCCDirectorProjection3D];
   
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:YES] )
+	if( ! [_director enableRetinaDisplay:YES] )
 		CCLOG(@"Retina Display Not supported");
   
-  [window_ addSubview:director_.view];
-  [window_ makeKeyAndVisible];
+  [self.window addSubview:_director.view];
+  [self.window makeKeyAndVisible];
   
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -79,7 +85,7 @@
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
   CCScene *scene = [CCScene node];
   [scene addChild:[LineDrawer node]];
-	[director_ pushScene: scene]; 
+	[_director pushScene: scene]; 
   
 	return YES;
 }
@@ -94,23 +100,23 @@
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application
 {
-  [director_ pause];
+  [_director pause];
 }
 
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-  [director_ resume];
+  [_director resume];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application
 {
-  [director_ stopAnimation];
+  [_director stopAnimation];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
-  [director_ startAnimation];
+  [_director startAnimation];
 }
 
 // application will be killed
