@@ -23,7 +23,13 @@
 
 - (NSString *)remoteUrl {
   if (self.protocol && self.hostname && self.dbname) {
-    return [NSString stringWithFormat:@"%@://%@/%@", self.protocol, self.hostname, self.dbname];
+    if (([self.protocol isEqualToString:@"http"] && self.port == 80)
+        || ([self.protocol isEqualToString:@"https"] && self.port == 443)) {
+      return [NSString stringWithFormat:@"%@://%@/%@", self.protocol, self.hostname, self.dbname];
+    } else {
+      return [NSString stringWithFormat:@"%@://%@:%d/%@", self.protocol, self.hostname, self.port, self.dbname];
+
+    }
   } else {
     return nil;
   }

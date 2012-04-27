@@ -115,6 +115,7 @@
   }
   Configuration *conf = [[Globals sharedInstance] currentConfiguration];
   NSLog(@"configuration: %@", conf.displayName);
+  NSLog(@"remote URL: %@", conf.remoteUrl);
   NSURL* newRemoteURL = [NSURL URLWithString:conf.remoteUrl];
   
   if (newRemoteURL) {
