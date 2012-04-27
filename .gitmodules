@@ -1,3 +1,9 @@
 [submodule "Vendor/cocos2d-iphone"]
 	path = Vendor/cocos2d-iphone
 	url = git://github.com/cocos2d/cocos2d-iphone.git
+[submodule "Vendor/TouchDB"]
+	path = Vendor/TouchDB
+	url = https://github.com/couchbaselabs/TouchDB-iOS.git
+[submodule "Vendor/CouchCocoa"]
+	path = Vendor/CouchCocoa
+	url = https://github.com/couchbaselabs/CouchCocoa.git
