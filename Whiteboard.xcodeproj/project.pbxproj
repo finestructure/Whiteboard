@@ -134,6 +134,7 @@
 		5A130CD1154ADA5B00A16684 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CD0154ADA5B00A16684 /* libsqlite3.dylib */; };
 		5A130CD3154ADA6F00A16684 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */; };
 		5A130CDB154ADD3E00A16684 /* CouchPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDA154ADD3E00A16684 /* CouchPoint.m */; };
+		5A130CDE154AE26100A16684 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDD154AE26000A16684 /* GCD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -411,6 +412,8 @@
 		5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5A130CD9154ADD3E00A16684 /* CouchPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchPoint.h; sourceTree = "<group>"; };
 		5A130CDA154ADD3E00A16684 /* CouchPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchPoint.m; sourceTree = "<group>"; };
+		5A130CDC154AE26000A16684 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
+		5A130CDD154AE26000A16684 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -499,6 +502,8 @@
 				5A130CC7154AD84600A16684 /* Configuration.m */,
 				5A130CC3154AD82F00A16684 /* Database.h */,
 				5A130CC4154AD82F00A16684 /* Database.m */,
+				5A130CDC154AE26000A16684 /* GCD.h */,
+				5A130CDD154AE26000A16684 /* GCD.m */,
 				5A13053C154836D900A16684 /* AppDelegate.h */,
 				5A13053D154836D900A16684 /* AppDelegate.m */,
 				5A130534154836D900A16684 /* Supporting Files */,
@@ -1094,6 +1099,7 @@
 				5A130CC8154AD84600A16684 /* Configuration.m in Sources */,
 				5A130CCB154AD86000A16684 /* Globals.m in Sources */,
 				5A130CDB154ADD3E00A16684 /* CouchPoint.m in Sources */,
+				5A130CDE154AE26100A16684 /* GCD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
