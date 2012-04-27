@@ -126,6 +126,13 @@
 		5A130CAB154A9E2C00A16684 /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A130C47154A9E2C00A16684 /* vec4.c */; };
 		5A130CAE154ACD4100A16684 /* CCRenderTextureWithDepth.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CAD154ACD4100A16684 /* CCRenderTextureWithDepth.m */; };
 		5A130CB5154ACFDD00A16684 /* LinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CB4154ACFDD00A16684 /* LinePoint.m */; };
+		5A130CC5154AD82F00A16684 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CC4154AD82F00A16684 /* Database.m */; };
+		5A130CC8154AD84600A16684 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CC7154AD84600A16684 /* Configuration.m */; };
+		5A130CCB154AD86000A16684 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CCA154AD86000A16684 /* Globals.m */; };
+		5A130CCE154AD93B00A16684 /* CouchCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CCC154AD93B00A16684 /* CouchCocoa.framework */; };
+		5A130CCF154AD93B00A16684 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CCD154AD93B00A16684 /* TouchDB.framework */; };
+		5A130CD1154ADA5B00A16684 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CD0154ADA5B00A16684 /* libsqlite3.dylib */; };
+		5A130CD3154ADA6F00A16684 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,6 +398,16 @@
 		5A130CAD154ACD4100A16684 /* CCRenderTextureWithDepth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRenderTextureWithDepth.m; sourceTree = "<group>"; };
 		5A130CB3154ACFDD00A16684 /* LinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinePoint.h; sourceTree = "<group>"; };
 		5A130CB4154ACFDD00A16684 /* LinePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePoint.m; sourceTree = "<group>"; };
+		5A130CC3154AD82F00A16684 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		5A130CC4154AD82F00A16684 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
+		5A130CC6154AD84600A16684 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		5A130CC7154AD84600A16684 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
+		5A130CC9154AD86000A16684 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		5A130CCA154AD86000A16684 /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
+		5A130CCC154AD93B00A16684 /* CouchCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CouchCocoa.framework; path = Vendor/CouchCocoa.framework; sourceTree = "<group>"; };
+		5A130CCD154AD93B00A16684 /* TouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchDB.framework; path = Vendor/TouchDB.framework; sourceTree = "<group>"; };
+		5A130CD0154ADA5B00A16684 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +415,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A130CD3154ADA6F00A16684 /* SystemConfiguration.framework in Frameworks */,
+				5A130CD1154ADA5B00A16684 /* libsqlite3.dylib in Frameworks */,
 				5A130B59154A90B900A16684 /* libz.dylib in Frameworks */,
 				5A130B55154A908600A16684 /* QuartzCore.framework in Frameworks */,
 				5A130B4D154A902600A16684 /* OpenGLES.framework in Frameworks */,
@@ -407,6 +426,8 @@
 				5A13052E154836D900A16684 /* UIKit.framework in Frameworks */,
 				5A130530154836D900A16684 /* Foundation.framework in Frameworks */,
 				5A130532154836D900A16684 /* CoreGraphics.framework in Frameworks */,
+				5A130CCE154AD93B00A16684 /* CouchCocoa.framework in Frameworks */,
+				5A130CCF154AD93B00A16684 /* TouchDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +467,10 @@
 		5A13052C154836D900A16684 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */,
+				5A130CD0154ADA5B00A16684 /* libsqlite3.dylib */,
+				5A130CCC154AD93B00A16684 /* CouchCocoa.framework */,
+				5A130CCD154AD93B00A16684 /* TouchDB.framework */,
 				5A130B58154A90B900A16684 /* libz.dylib */,
 				5A130B56154A90A700A16684 /* GameKit.framework */,
 				5A130B54154A908600A16684 /* QuartzCore.framework */,
@@ -464,6 +489,12 @@
 		5A130533154836D900A16684 /* Whiteboard */ = {
 			isa = PBXGroup;
 			children = (
+				5A130CC9154AD86000A16684 /* Globals.h */,
+				5A130CCA154AD86000A16684 /* Globals.m */,
+				5A130CC6154AD84600A16684 /* Configuration.h */,
+				5A130CC7154AD84600A16684 /* Configuration.m */,
+				5A130CC3154AD82F00A16684 /* Database.h */,
+				5A130CC4154AD82F00A16684 /* Database.m */,
 				5A13053C154836D900A16684 /* AppDelegate.h */,
 				5A13053D154836D900A16684 /* AppDelegate.m */,
 				5A130534154836D900A16684 /* Supporting Files */,
@@ -1046,6 +1077,9 @@
 				5A130CAB154A9E2C00A16684 /* vec4.c in Sources */,
 				5A130CAE154ACD4100A16684 /* CCRenderTextureWithDepth.m in Sources */,
 				5A130CB5154ACFDD00A16684 /* LinePoint.m in Sources */,
+				5A130CC5154AD82F00A16684 /* Database.m in Sources */,
+				5A130CC8154AD84600A16684 /* Configuration.m in Sources */,
+				5A130CCB154AD86000A16684 /* Globals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1137,6 +1171,10 @@
 		5A13055D154836D900A16684 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Vendor\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Whiteboard/Whiteboard-Prefix.pch";
 				INFOPLIST_FILE = "Whiteboard/Whiteboard-Info.plist";
@@ -1149,6 +1187,10 @@
 		5A13055E154836D900A16684 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Vendor\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Whiteboard/Whiteboard-Prefix.pch";
 				INFOPLIST_FILE = "Whiteboard/Whiteboard-Info.plist";
