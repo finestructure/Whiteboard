@@ -25,21 +25,27 @@
 
 @synthesize window = _window;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-	// Create the main window
-	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+#pragma mark - Helpers
+
+- (void)setupTextures {
+  // Default texture format for PNG/BMP/TIFF/JPEG/GIF images
+	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
+	// You can change anytime.
+	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
   
+	// When in iPhone RetinaDisplay, iPad, iPad RetinaDisplay mode, CCFileUtils will append the "-hd", "-ipad", "-ipadhd" to all loaded files
+	// If the -hd, -ipad, -ipadhd files are not found, it will load the non-suffixed version
+	[CCFileUtils setiPhoneRetinaDisplaySuffix:@"-hd"];		// Default on iPhone RetinaDisplay is "-hd"
+	[CCFileUtils setiPadSuffix:@"-ipad"];					// Default on iPad is "" (empty string)
+	[CCFileUtils setiPadRetinaDisplaySuffix:@"-ipadhd"];	// Default on iPad RetinaDisplay is "-ipadhd"
   
-	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
-	CCGLView *glView = [CCGLView viewWithFrame:[self.window bounds]
-                                 pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
-                                 depthFormat:0	//GL_DEPTH_COMPONENT24_OES
-                          preserveBackbuffer:NO
-                                  sharegroup:nil
-                               multiSampling:NO
-                             numberOfSamples:0];
-  
+	// Assume that PVR images have premultiplied alpha
+	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
+}
+
+
+- (void)setupDirectorWithView:(CCGLView *)glView {
 	CCDirectorIOS *director = (CCDirectorIOS*) [CCDirector sharedDirector];
   
 	director.wantsFullScreenLayout = YES;
@@ -63,28 +69,38 @@
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
 	if( ! [director enableRetinaDisplay:YES] )
 		CCLOG(@"Retina Display Not supported");
+}
+
+
+#pragma mark - Init and app lifecycle
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  //TODO: is this needed at all?
+  [self setupTextures];
   
-  [self.window addSubview:director.view];
+	// Create the main window
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  
+	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
+	CCGLView *glView = [CCGLView viewWithFrame:[self.window bounds]
+                                 pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
+                                 depthFormat:0	//GL_DEPTH_COMPONENT24_OES
+                          preserveBackbuffer:NO
+                                  sharegroup:nil
+                               multiSampling:NO
+                             numberOfSamples:0];
+  
+  [self setupDirectorWithView:glView];
+  
+  [self.window addSubview:glView];
   [self.window makeKeyAndVisible];
-  
-	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
-	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
-	// You can change anytime.
-	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-  
-	// When in iPhone RetinaDisplay, iPad, iPad RetinaDisplay mode, CCFileUtils will append the "-hd", "-ipad", "-ipadhd" to all loaded files
-	// If the -hd, -ipad, -ipadhd files are not found, it will load the non-suffixed version
-	[CCFileUtils setiPhoneRetinaDisplaySuffix:@"-hd"];		// Default on iPhone RetinaDisplay is "-hd"
-	[CCFileUtils setiPadSuffix:@"-ipad"];					// Default on iPad is "" (empty string)
-	[CCFileUtils setiPadRetinaDisplaySuffix:@"-ipadhd"];	// Default on iPad RetinaDisplay is "-ipadhd"
-  
-	// Assume that PVR images have premultiplied alpha
-	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
   
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
   CCScene *scene = [CCScene node];
   [scene addChild:[LineDrawer node]];
-	[director pushScene: scene]; 
+	[[CCDirector sharedDirector] pushScene: scene]; 
   
 	return YES;
 }
