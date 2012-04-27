@@ -17,7 +17,6 @@
 #import "LineDrawer.h"
 
 @interface AppDelegate () {
-  __weak CCDirectorIOS *_director;
 }
 
 @end
@@ -41,31 +40,31 @@
                                multiSampling:NO
                              numberOfSamples:0];
   
-	_director = (CCDirectorIOS*) [CCDirector sharedDirector];
+	CCDirectorIOS *director = (CCDirectorIOS*) [CCDirector sharedDirector];
   
-	_director.wantsFullScreenLayout = YES;
+	director.wantsFullScreenLayout = YES;
   
 	// Display FSP and SPF
-	[_director setDisplayStats:YES];
+	[director setDisplayStats:YES];
   
 	// set FPS at 60
-	[_director setAnimationInterval:1.0/60];
+	[director setAnimationInterval:1.0/60];
   
 	// attach the openglView to the director
-	[_director setView:glView];
+	[director setView:glView];
   
 	// for rotation and other messages
-	[_director setDelegate:self];
+	[director setDelegate:self];
   
 	// 2D projection
-	[_director setProjection:kCCDirectorProjection2D];
+	[director setProjection:kCCDirectorProjection2D];
   //	[director setProjection:kCCDirectorProjection3D];
   
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [_director enableRetinaDisplay:YES] )
+	if( ! [director enableRetinaDisplay:YES] )
 		CCLOG(@"Retina Display Not supported");
   
-  [self.window addSubview:_director.view];
+  [self.window addSubview:director.view];
   [self.window makeKeyAndVisible];
   
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
@@ -85,7 +84,7 @@
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
   CCScene *scene = [CCScene node];
   [scene addChild:[LineDrawer node]];
-	[_director pushScene: scene]; 
+	[director pushScene: scene]; 
   
 	return YES;
 }
@@ -100,23 +99,23 @@
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application
 {
-  [_director pause];
+  [[CCDirector sharedDirector] pause];
 }
 
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-  [_director resume];
+  [[CCDirector sharedDirector] resume];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application
 {
-  [_director stopAnimation];
+  [[CCDirector sharedDirector] stopAnimation];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
-  [_director startAnimation];
+  [[CCDirector sharedDirector] startAnimation];
 }
 
 // application will be killed
