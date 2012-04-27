@@ -97,11 +97,19 @@
   [self setupDirectorWithView:glView];
   
   [self.window addSubview:glView];
+  
+  CGFloat height = 44;
+  UIToolbar *toobar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - height, self.window.frame.size.width, height)];
+  UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"Test" style:UIBarButtonItemStyleBordered target:nil action:nil];
+  toobar.items = [NSArray arrayWithObject:button];
+  
+  [self.window addSubview:toobar];
+  
   [self.window makeKeyAndVisible];
   
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
   CCScene *scene = [CCScene node];
-  [scene addChild:[Replay node]];
+  [scene addChild:[LineDrawer node]];
 	[[CCDirector sharedDirector] pushScene: scene];
   
   NSError *error = nil;

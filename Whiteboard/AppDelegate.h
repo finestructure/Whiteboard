@@ -11,6 +11,6 @@
 
 @interface AppDelegate : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 
-@property (nonatomic, retain) UIWindow *window;
+@property (strong, nonatomic) UIWindow *window;
 
 @end
