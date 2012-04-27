@@ -83,6 +83,7 @@ typedef struct _LineVertex {
     CouchQueryRow *row;
     while ((row = rows.nextRow)) {
       WBEvent *event = [WBEvent modelForDocument:row.document];
+      NSLog(@"processing event %d", [event.index unsignedIntegerValue]);
       [self processEvent:event];
     }
   }
@@ -363,7 +364,6 @@ typedef struct _LineVertex {
 
 
 - (void)processEvent:(WBEvent *)event {
-  NSLog(@"processing event %d", [event.index unsignedIntegerValue]);
   switch ([event.phase unsignedIntegerValue]) {
     case UITouchPhaseBegan:
       [self touchBegan:event];
