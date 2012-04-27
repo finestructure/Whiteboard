@@ -27,8 +27,11 @@
 #import "cocos2d.h"
 
 #import "CCRenderTextureWithDepth.h"
+#import "Database.h"
+#import "Globals.h"
 #import "LineDrawer.h"
 #import "LinePoint.h"
+#import "WBEvent.h"
 
 
 float kWidth = 2;
@@ -365,6 +368,18 @@ typedef struct _LineVertex {
 }
 
 
+- (void)saveEvent:(UITouch *)touch {
+  WBEvent *evt = [[WBEvent alloc] initWithTouch:touch];
+  RESTOperation *op = [evt save];
+  [op onCompletion:^{
+    if (op.error) {
+      NSLog(@"Error while saving: %@", [op.error localizedDescription]);
+    }
+  }];
+  [op start];
+}
+
+
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
   CGPoint point = [self getPoint:touch];
   
@@ -375,6 +390,7 @@ typedef struct _LineVertex {
   [self addPoint:point withSize:kWidth];
   [self addPoint:point withSize:kWidth];
   
+  [self saveEvent:touch];
   return YES;
 }
 
@@ -391,6 +407,8 @@ typedef struct _LineVertex {
   }
   //TODO: vary size
   [self addPoint:point withSize:kWidth];
+
+  [self saveEvent:touch];  
 }
 
 
@@ -398,11 +416,13 @@ typedef struct _LineVertex {
   CGPoint point = [self getPoint:touch];
   //TODO: vary size
   [self endLineAt:point withSize:kWidth];
+
+  [self saveEvent:touch];
 }
 
 
 - (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
-  
+  [self saveEvent:touch];
 }
 
 

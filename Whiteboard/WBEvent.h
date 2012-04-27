@@ -14,8 +14,10 @@
 @property (nonatomic, copy) NSNumber *y;
 @property (nonatomic, copy) NSNumber *index;
 @property (nonatomic, copy) NSString *type;
-@property (nonatomic, copy) NSString *state;
+@property (nonatomic, copy) NSNumber *phase;
 
 @property (nonatomic, assign) CGPoint position;
+
+- (id)initWithTouch:(UITouch *)touch;
 
 @end

@@ -8,18 +8,22 @@
 
 #import "WBEvent.h"
 
+#import "Database.h"
 #import "Globals.h"
+
 
 @implementation WBEvent
 
-@dynamic x, y, index, type, state;
+@dynamic x, y, index, type, phase;
 
 
-- (id)initWithNewDocumentInDatabase:(CouchDatabase *)database
-{
-  self = [super initWithNewDocumentInDatabase:database];
+- (id)initWithTouch:(UITouch *)touch {
+  self = [super initWithNewDocumentInDatabase:[Database sharedInstance].database];
   if (self) {
     self.type = @"event";
+    self.index = [NSNumber numberWithUnsignedInteger:[[Globals sharedInstance] nextSequenceId]];
+    self.position = [touch locationInView:touch.view];
+    self.phase = [NSNumber numberWithUnsignedInteger:touch.phase];
   }
   return self;
 }
@@ -34,7 +38,6 @@
 - (CGPoint)position {
   CGPoint p = CGPointMake([self.x doubleValue], [self.y doubleValue]);
   return p;
-}
 }
 
 
