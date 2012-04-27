@@ -11,14 +11,11 @@
 
 @interface AppDelegate : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 {
-	UIWindow *window_;
-	UINavigationController *navController_;
-  
+	UIWindow *window_;  
 	CCDirectorIOS	*__unsafe_unretained director_;							// weak ref
 }
 
 @property (nonatomic, retain) UIWindow *window;
-@property (readonly) UINavigationController *navController;
 @property (unsafe_unretained, readonly) CCDirectorIOS *director;
 
 @end

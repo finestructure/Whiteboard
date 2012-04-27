@@ -18,7 +18,7 @@
 
 @implementation AppDelegate
 
-@synthesize window=window_, navController=navController_, director=director_;
+@synthesize window=window_, director=director_;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -59,16 +59,8 @@
 	if( ! [director_ enableRetinaDisplay:YES] )
 		CCLOG(@"Retina Display Not supported");
   
-	// Create a Navigation Controller with the Director
-	navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
-	navController_.navigationBarHidden = YES;
-  
-	// set the Navigation Controller as the root view controller
-  //	[window_ setRootViewController:rootViewController_];
-	[window_ addSubview:navController_.view];
-  
-	// make main window visible
-	[window_ makeKeyAndVisible];
+  [window_ addSubview:director_.view];
+  [window_ makeKeyAndVisible];
   
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -102,27 +94,23 @@
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ pause];
+  [director_ pause];
 }
 
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ resume];
+  [director_ resume];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ stopAnimation];
+  [director_ stopAnimation];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ startAnimation];
+  [director_ startAnimation];
 }
 
 // application will be killed
