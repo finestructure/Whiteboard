@@ -25,5 +25,7 @@ extern NSString * const kConfigurationDefaultsKey;
 - (Configuration *)currentConfiguration;
 - (void)registerDefaults;
 
+- (NSUInteger)nextSequenceId;
+
 @end
 

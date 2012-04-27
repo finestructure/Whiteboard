@@ -129,6 +129,14 @@ NSString * const kConfigurationDefaultsKey = @"Configuration";
 }
 
 
+- (NSUInteger)nextSequenceId {
+  static NSUInteger sequenceId = 0;
+  @synchronized(self) {
+    return sequenceId++;
+  }
+}
+
+
 - (void)registerDefaults {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   Configuration *defaultConf = [self defaultConfiguration];
