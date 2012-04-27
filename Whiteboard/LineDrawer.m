@@ -85,9 +85,6 @@ typedef struct _LineVertex {
     [self addChild:renderTexture];
 
     self.isTouchEnabled = YES;
-
-//    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-//    [self addGestureRecognizer:longPressGestureRecognizer];
   }
   return self;
 }
@@ -353,33 +350,6 @@ typedef struct _LineVertex {
   if (smoothedPoints) {
     [self drawLines:smoothedPoints withColor:color];
   }
-  [renderTexture end];
-}
-
-#pragma mark - Math
-
-#pragma mark - GestureRecognizers
-
-- (float)extractSize:(UIPanGestureRecognizer *)panGestureRecognizer
-{
-  //! result of trial & error
-  float vel = ccpLength([panGestureRecognizer velocityInView:panGestureRecognizer.view]);
-  float size = vel / 166.0f;
-  size = clampf(size, 1, 40);
-
-  if ([velocities count] > 1) {
-    size = size * 0.2f + [[velocities objectAtIndex:[velocities count] - 1] floatValue] * 0.8f;
-  }
-  [velocities addObject:[NSNumber numberWithFloat:size]];
-  return size;
-}
-
-
-- (void)handleLongPress:(UILongPressGestureRecognizer *)longPressGestureRecognizer
-{
-  [renderTexture beginWithClear:1.0 g:1.0 b:1.0 a:0];
-  glClearDepthf(100);
-  glClear(GL_DEPTH_BUFFER_BIT);
   [renderTexture end];
 }
 
