@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+#import "cocos2d.h"
+
+@interface ViewController : UIViewController<CCDirectorDelegate>
 
 @end
