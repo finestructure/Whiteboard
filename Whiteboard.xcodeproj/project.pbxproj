@@ -125,6 +125,7 @@
 		5A130CAA154A9E2C00A16684 /* vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A130C46154A9E2C00A16684 /* vec3.c */; };
 		5A130CAB154A9E2C00A16684 /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A130C47154A9E2C00A16684 /* vec4.c */; };
 		5A130CAE154ACD4100A16684 /* CCRenderTextureWithDepth.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CAD154ACD4100A16684 /* CCRenderTextureWithDepth.m */; };
+		5A130CB5154ACFDD00A16684 /* LinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CB4154ACFDD00A16684 /* LinePoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -388,6 +389,8 @@
 		5A130C47154A9E2C00A16684 /* vec4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vec4.c; sourceTree = "<group>"; };
 		5A130CAC154ACD4100A16684 /* CCRenderTextureWithDepth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderTextureWithDepth.h; sourceTree = "<group>"; };
 		5A130CAD154ACD4100A16684 /* CCRenderTextureWithDepth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRenderTextureWithDepth.m; sourceTree = "<group>"; };
+		5A130CB3154ACFDD00A16684 /* LinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinePoint.h; sourceTree = "<group>"; };
+		5A130CB4154ACFDD00A16684 /* LinePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -464,6 +467,8 @@
 				5A13053C154836D900A16684 /* AppDelegate.h */,
 				5A13053D154836D900A16684 /* AppDelegate.m */,
 				5A130534154836D900A16684 /* Supporting Files */,
+				5A130CB3154ACFDD00A16684 /* LinePoint.h */,
+				5A130CB4154ACFDD00A16684 /* LinePoint.m */,
 				5A13069B1548548F00A16684 /* LineDrawer.h */,
 				5A13069C1548548F00A16684 /* LineDrawer.m */,
 				5A130CAC154ACD4100A16684 /* CCRenderTextureWithDepth.h */,
@@ -1040,6 +1045,7 @@
 				5A130CAA154A9E2C00A16684 /* vec3.c in Sources */,
 				5A130CAB154A9E2C00A16684 /* vec4.c in Sources */,
 				5A130CAE154ACD4100A16684 /* CCRenderTextureWithDepth.m in Sources */,
+				5A130CB5154ACFDD00A16684 /* LinePoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

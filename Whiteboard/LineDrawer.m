@@ -28,28 +28,18 @@
 
 #import "CCRenderTextureWithDepth.h"
 #import "LineDrawer.h"
+#import "LinePoint.h"
 
 
 float kWidth = 2;
 float kOverdraw = 1;
+
 
 typedef struct _LineVertex {
   CGPoint pos;
   float z;
   ccColor4F color;
 } LineVertex;
-
-
-@interface LinePoint : NSObject
-@property(nonatomic, assign) CGPoint pos;
-@property(nonatomic, assign) float width;
-@end
-
-
-@implementation LinePoint
-@synthesize pos;
-@synthesize width;
-@end
 
 
 @implementation LineDrawer {
