@@ -22,4 +22,6 @@
 - (void)disconnect;
 - (CouchDesignDocument *)designDocumentWithName:(NSString *)name;
 
+- (CouchQuery *)events;
+
 @end

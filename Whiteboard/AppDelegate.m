@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "Database.h"
 #import "LineDrawer.h"
+#import "Replay.h"
 
 @interface AppDelegate () {
 }
@@ -100,7 +101,7 @@
   
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
   CCScene *scene = [CCScene node];
-  [scene addChild:[LineDrawer node]];
+  [scene addChild:[Replay node]];
 	[[CCDirector sharedDirector] pushScene: scene];
   
   NSError *error = nil;

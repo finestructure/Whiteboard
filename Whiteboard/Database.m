@@ -138,4 +138,22 @@
 #pragma mark - Fetch methods
 
 
+- (CouchQuery *)events
+{
+  NSString *name = @"events";
+  CouchDesignDocument* design = [self designDocumentWithName: @"default"];
+  [design defineViewNamed:name
+                 mapBlock:^(NSDictionary* doc, void (^emit)(id key, id value)) {
+                   id type = [doc objectForKey: @"type"];
+                   if (type && [type isEqualToString:@"event"]) {
+                     id index = [doc objectForKey:@"index"];
+                     emit(index, doc);
+                   }
+                 }
+                  version: @"1.0"];
+  CouchQuery *query = [design queryViewNamed:name];
+  return query;
+}
+
+
 @end

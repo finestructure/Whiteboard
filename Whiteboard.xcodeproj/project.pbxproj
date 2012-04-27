@@ -135,6 +135,7 @@
 		5A130CD3154ADA6F00A16684 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */; };
 		5A130CDB154ADD3E00A16684 /* WBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDA154ADD3E00A16684 /* WBEvent.m */; };
 		5A130CDE154AE26100A16684 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDD154AE26000A16684 /* GCD.m */; };
+		5A130CE1154AED5200A16684 /* Replay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CE0154AED5100A16684 /* Replay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -410,10 +411,12 @@
 		5A130CCD154AD93B00A16684 /* TouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchDB.framework; path = Vendor/TouchDB.framework; sourceTree = "<group>"; };
 		5A130CD0154ADA5B00A16684 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		5A130CD2154ADA6F00A16684 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		5A130CD9154ADD3E00A16684 /* WBEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; path = WBEvent.h; sourceTree = "<group>"; };
+		5A130CD9154ADD3E00A16684 /* WBEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBEvent.h; sourceTree = "<group>"; };
 		5A130CDA154ADD3E00A16684 /* WBEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBEvent.m; sourceTree = "<group>"; };
 		5A130CDC154AE26000A16684 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
 		5A130CDD154AE26000A16684 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
+		5A130CDF154AED5100A16684 /* Replay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Replay.h; sourceTree = "<group>"; };
+		5A130CE0154AED5100A16684 /* Replay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Replay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,6 +514,8 @@
 				5A130CB4154ACFDD00A16684 /* LinePoint.m */,
 				5A13069B1548548F00A16684 /* LineDrawer.h */,
 				5A13069C1548548F00A16684 /* LineDrawer.m */,
+				5A130CDF154AED5100A16684 /* Replay.h */,
+				5A130CE0154AED5100A16684 /* Replay.m */,
 				5A130CAC154ACD4100A16684 /* CCRenderTextureWithDepth.h */,
 				5A130CAD154ACD4100A16684 /* CCRenderTextureWithDepth.m */,
 			);
@@ -1100,6 +1105,7 @@
 				5A130CCB154AD86000A16684 /* Globals.m in Sources */,
 				5A130CDB154ADD3E00A16684 /* WBEvent.m in Sources */,
 				5A130CDE154AE26100A16684 /* GCD.m in Sources */,
+				5A130CE1154AED5200A16684 /* Replay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
