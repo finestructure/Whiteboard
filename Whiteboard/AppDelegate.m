@@ -83,7 +83,7 @@
   [self setupTextures];
   
 	// Create the main window
-	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
 	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
 	CCGLView *glView = [CCGLView viewWithFrame:[self.window bounds]
@@ -98,12 +98,12 @@
   
   [self.window addSubview:glView];
   
-  CGFloat height = 44;
-  UIToolbar *toobar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - height, self.window.frame.size.width, height)];
-  UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"Test" style:UIBarButtonItemStyleBordered target:nil action:nil];
-  toobar.items = [NSArray arrayWithObject:button];
-  
-  [self.window addSubview:toobar];
+//  CGFloat height = 44;
+//  UIToolbar *toobar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - height, self.window.frame.size.width, height)];
+//  UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"Test" style:UIBarButtonItemStyleBordered target:nil action:nil];
+//  toobar.items = [NSArray arrayWithObject:button];
+//  
+//  [self.window addSubview:toobar];
   
   [self.window makeKeyAndVisible];
   
