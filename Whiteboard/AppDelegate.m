@@ -47,33 +47,6 @@
 }
 
 
-- (void)setupDirectorWithView:(CCGLView *)glView {
-	CCDirectorIOS *director = (CCDirectorIOS*) [CCDirector sharedDirector];
-  
-	director.wantsFullScreenLayout = YES;
-  
-	// Display FSP and SPF
-	[director setDisplayStats:YES];
-  
-	// set FPS at 60
-	[director setAnimationInterval:1.0/60];
-  
-	// attach the openglView to the director
-	[director setView:glView];
-  
-	// for rotation and other messages
-	[director setDelegate:self];
-  
-	// 2D projection
-	[director setProjection:kCCDirectorProjection2D];
-  //	[director setProjection:kCCDirectorProjection3D];
-  
-	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director enableRetinaDisplay:YES] )
-		CCLOG(@"Retina Display Not supported");
-}
-
-
 #pragma mark - Init and app lifecycle
 
 
@@ -82,35 +55,18 @@
   //TODO: is this needed at all?
   [self setupTextures];
   
-	// Create the main window
-//	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  
-	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
-	CCGLView *glView = [CCGLView viewWithFrame:[self.window bounds]
-                                 pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
-                                 depthFormat:0	//GL_DEPTH_COMPONENT24_OES
-                          preserveBackbuffer:NO
-                                  sharegroup:nil
-                               multiSampling:NO
-                             numberOfSamples:0];
-  
-  [self setupDirectorWithView:glView];
-  
-  [self.window addSubview:glView];
-  
-//  CGFloat height = 44;
-//  UIToolbar *toobar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - height, self.window.frame.size.width, height)];
-//  UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"Test" style:UIBarButtonItemStyleBordered target:nil action:nil];
-//  toobar.items = [NSArray arrayWithObject:button];
-//  
-//  [self.window addSubview:toobar];
-  
+	CCDirector *director = [CCDirector sharedDirector];
+	
+  // Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
+	if( ! [director enableRetinaDisplay:YES] )
+		CCLOG(@"Retina Display Not supported");
+	
+	[director setAnimationInterval:1.0/60];
+	[director setDisplayStats:YES];
+
   [self.window makeKeyAndVisible];
   
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-  CCScene *scene = [CCScene node];
-  [scene addChild:[LineDrawer node]];
-	[[CCDirector sharedDirector] pushScene: scene];
   
   NSError *error = nil;
   if (! [[Database sharedInstance] connect:&error]) {
