@@ -55,12 +55,13 @@
   //TODO: is this needed at all?
   [self setupTextures];
   
-	CCDirector *director = [CCDirector sharedDirector];
+	CCDirectorIOS *director = (CCDirectorIOS *)[CCDirector sharedDirector];
 	
   // Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
 	if( ! [director enableRetinaDisplay:YES] )
 		CCLOG(@"Retina Display Not supported");
 	
+  [director setDelegate:self];
 	[director setAnimationInterval:1.0/60];
 	[director setDisplayStats:YES];
 
