@@ -9,8 +9,12 @@
 #import "WhiteboardLayer.h"
 
 #import "cocos2d.h"
+
 #import "CCRenderTextureWithDepth.h"
+#import "Database.h"
+#import "Globals.h"
 #import "LinePoint.h"
+#import "WBEvent.h"
 
 
 typedef struct _LineVertex {
@@ -362,6 +366,14 @@ ccColor4F color;
 
 
 - (void)saveEvent:(UITouch *)touch {
+  WBEvent *evt = [[WBEvent alloc] initWithTouch:touch];
+  RESTOperation *op = [evt save];
+  [op onCompletion:^{
+    if (op.error) {
+      NSLog(@"Error while saving: %@", [op.error localizedDescription]);
+    }
+  }];
+  [op start];
 }
 
 
@@ -381,7 +393,6 @@ ccColor4F color;
 
 
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-  NSLog(@"moved %@", event);
   CGPoint point = [self getPoint:touch];
   float eps = 1.5f;
   if ([points count] > 0) {
