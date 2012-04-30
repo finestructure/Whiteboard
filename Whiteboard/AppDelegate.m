@@ -15,8 +15,6 @@
 
 #import "AppDelegate.h"
 #import "Database.h"
-#import "LineDrawer.h"
-#import "Replay.h"
 
 @interface AppDelegate () {
 }

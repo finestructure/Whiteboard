@@ -18,7 +18,6 @@
 		5A13054E154836D900A16684 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13052F154836D900A16684 /* Foundation.framework */; };
 		5A130556154836D900A16684 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A130554154836D900A16684 /* InfoPlist.strings */; };
 		5A130559154836D900A16684 /* WhiteboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130558154836D900A16684 /* WhiteboardTests.m */; };
-		5A13069D1548548F00A16684 /* LineDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A13069C1548548F00A16684 /* LineDrawer.m */; };
 		5A130B4D154A902600A16684 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B4C154A902600A16684 /* OpenGLES.framework */; };
 		5A130B4F154A904300A16684 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B4E154A904300A16684 /* OpenAL.framework */; };
 		5A130B51154A905300A16684 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B50154A905300A16684 /* AudioToolbox.framework */; };
@@ -169,8 +168,6 @@
 		5A130555154836D900A16684 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A130557154836D900A16684 /* WhiteboardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteboardTests.h; sourceTree = "<group>"; };
 		5A130558154836D900A16684 /* WhiteboardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteboardTests.m; sourceTree = "<group>"; };
-		5A13069B1548548F00A16684 /* LineDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineDrawer.h; sourceTree = "<group>"; };
-		5A13069C1548548F00A16684 /* LineDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineDrawer.m; sourceTree = "<group>"; };
 		5A130B4C154A902600A16684 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		5A130B4E154A904300A16684 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		5A130B50154A905300A16684 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -528,8 +525,6 @@
 				5A130534154836D900A16684 /* Supporting Files */,
 				5A130CB3154ACFDD00A16684 /* LinePoint.h */,
 				5A130CB4154ACFDD00A16684 /* LinePoint.m */,
-				5A13069B1548548F00A16684 /* LineDrawer.h */,
-				5A13069C1548548F00A16684 /* LineDrawer.m */,
 				5A130CDF154AED5100A16684 /* Replay.h */,
 				5A130CE0154AED5100A16684 /* Replay.m */,
 				5A130CAC154ACD4100A16684 /* CCRenderTextureWithDepth.h */,
@@ -1018,7 +1013,6 @@
 			files = (
 				5A13053A154836D900A16684 /* main.m in Sources */,
 				5A13053E154836D900A16684 /* AppDelegate.m in Sources */,
-				5A13069D1548548F00A16684 /* LineDrawer.m in Sources */,
 				5A130C49154A9E2C00A16684 /* CCAction.m in Sources */,
 				5A130C4A154A9E2C00A16684 /* CCActionCamera.m in Sources */,
 				5A130C4B154A9E2C00A16684 /* CCActionEase.m in Sources */,
