@@ -12,5 +12,6 @@
 @interface AppDelegate : NSObject <UIApplicationDelegate>
 
 @property (nonatomic) IBOutlet UIWindow *window;
+@property (nonatomic, strong) NSNetService *netService;
 
 @end

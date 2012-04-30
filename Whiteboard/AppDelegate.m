@@ -24,6 +24,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize netService = _netService;
 
 
 #pragma mark - Helpers
@@ -59,6 +60,9 @@
     NSLog(@"Failed to connect to database: %@", [error localizedDescription]);
   }
   
+  UIDevice *device = [UIDevice currentDevice];
+  self.netService = [[NSNetService alloc] initWithDomain:@"local" type:@"_whiteboard._tcp" name:device.name port:5984];
+  [self.netService publish];
 	return YES;
 }
 

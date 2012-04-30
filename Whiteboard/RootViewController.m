@@ -40,7 +40,7 @@
 {
   NSLog(@"bonjour");
   UIView *view = [[event.allTouches anyObject] view];
-  BonjourBrowser *bb = [[BonjourBrowser alloc] initForType:@"_http._tcp"
+  BonjourBrowser *bb = [[BonjourBrowser alloc] initForType:@"_whiteboard._tcp"
                                                   inDomain:@"local"
                                              customDomains:nil
                                   showDisclosureIndicators:NO
