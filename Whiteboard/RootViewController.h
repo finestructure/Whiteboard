@@ -13,8 +13,9 @@
 @interface RootViewController : UIViewController<CCDirectorDelegate>
 
 @property (nonatomic) IBOutlet UIView *canvas;
+@property (nonatomic, strong) UIPopoverController *popover;
 
 - (IBAction)replayTapped:(id)sender;
-- (IBAction)bonjourTapped:(id)sender;
+- (IBAction)bonjourTapped:(id)sender event:(UIEvent *)event;
 
 @end

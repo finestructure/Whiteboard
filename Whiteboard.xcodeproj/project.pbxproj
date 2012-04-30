@@ -138,6 +138,10 @@
 		5A130D74154B380A00A16684 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A130D73154B380A00A16684 /* MainWindow.xib */; };
 		5A130D86154DB8BF00A16684 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130D84154DB8BF00A16684 /* RootViewController.m */; };
 		5A130D87154DB8BF00A16684 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A130D85154DB8BF00A16684 /* RootViewController.xib */; };
+		5A24070D154EB02C00B811CD /* BonjourBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A240706154EB02C00B811CD /* BonjourBrowser.m */; };
+		5A24070E154EB02C00B811CD /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A240708154EB02C00B811CD /* BrowserViewController.m */; };
+		5A24070F154EB02C00B811CD /* DomainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A24070A154EB02C00B811CD /* DomainViewController.m */; };
+		5A240710154EB02C00B811CD /* SimpleEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A24070C154EB02C00B811CD /* SimpleEditViewController.m */; };
 		5A4815A9154E8513005473F3 /* WhiteboardLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4815A8154E8513005473F3 /* WhiteboardLayer.m */; };
 /* End PBXBuildFile section */
 
@@ -422,6 +426,14 @@
 		5A130D83154DB8BF00A16684 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		5A130D84154DB8BF00A16684 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5A130D85154DB8BF00A16684 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		5A240705154EB02C00B811CD /* BonjourBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonjourBrowser.h; sourceTree = "<group>"; };
+		5A240706154EB02C00B811CD /* BonjourBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonjourBrowser.m; sourceTree = "<group>"; };
+		5A240707154EB02C00B811CD /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
+		5A240708154EB02C00B811CD /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
+		5A240709154EB02C00B811CD /* DomainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainViewController.h; sourceTree = "<group>"; };
+		5A24070A154EB02C00B811CD /* DomainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DomainViewController.m; sourceTree = "<group>"; };
+		5A24070B154EB02C00B811CD /* SimpleEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleEditViewController.h; sourceTree = "<group>"; };
+		5A24070C154EB02C00B811CD /* SimpleEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleEditViewController.m; sourceTree = "<group>"; };
 		5A4815A7154E8512005473F3 /* WhiteboardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteboardLayer.h; sourceTree = "<group>"; };
 		5A4815A8154E8513005473F3 /* WhiteboardLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteboardLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -566,6 +578,7 @@
 		5A1305A21548482A00A16684 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5A240704154EB02C00B811CD /* BonjourSupport */,
 				5A130B5D154A9E2C00A16684 /* cocos2d */,
 				5A130C1B154A9E2C00A16684 /* CocosDenshion */,
 				5A130C25154A9E2C00A16684 /* kazmath */,
@@ -901,6 +914,22 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		5A240704154EB02C00B811CD /* BonjourSupport */ = {
+			isa = PBXGroup;
+			children = (
+				5A240705154EB02C00B811CD /* BonjourBrowser.h */,
+				5A240706154EB02C00B811CD /* BonjourBrowser.m */,
+				5A240707154EB02C00B811CD /* BrowserViewController.h */,
+				5A240708154EB02C00B811CD /* BrowserViewController.m */,
+				5A240709154EB02C00B811CD /* DomainViewController.h */,
+				5A24070A154EB02C00B811CD /* DomainViewController.m */,
+				5A24070B154EB02C00B811CD /* SimpleEditViewController.h */,
+				5A24070C154EB02C00B811CD /* SimpleEditViewController.m */,
+			);
+			name = BonjourSupport;
+			path = Vendor/BonjourSupport;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1120,6 +1149,10 @@
 				5A130CE1154AED5200A16684 /* Replay.m in Sources */,
 				5A130D86154DB8BF00A16684 /* RootViewController.m in Sources */,
 				5A4815A9154E8513005473F3 /* WhiteboardLayer.m in Sources */,
+				5A24070D154EB02C00B811CD /* BonjourBrowser.m in Sources */,
+				5A24070E154EB02C00B811CD /* BrowserViewController.m in Sources */,
+				5A24070F154EB02C00B811CD /* DomainViewController.m in Sources */,
+				5A240710154EB02C00B811CD /* SimpleEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

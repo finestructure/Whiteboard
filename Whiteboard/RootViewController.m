@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 
+#import "BonjourBrowser.h"
 #import "WhiteboardLayer.h"
 #import "Replay.h"
 
@@ -18,6 +19,7 @@
 @implementation RootViewController
 
 @synthesize canvas = _canvas;
+@synthesize popover = _popover;
 
 #pragma mark - Actions
 
@@ -35,9 +37,17 @@
 }
 
 
-- (IBAction)bonjourTapped:(id)sender
+- (IBAction)bonjourTapped:(id)sender event:(UIEvent *)event
 {
   NSLog(@"bonjour");
+  UIView *view = [[event.allTouches anyObject] view];
+  BonjourBrowser *bb = [[BonjourBrowser alloc] initForType:@"_http._tcp"
+                                                  inDomain:@"local"
+                                             customDomains:nil
+                                  showDisclosureIndicators:NO
+                                          showCancelButton:NO];
+  self.popover = [[UIPopoverController alloc] initWithContentViewController:bb];
+  [self.popover presentPopoverFromRect:view.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 
