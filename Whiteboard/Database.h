@@ -12,10 +12,12 @@
 @class CouchDesignDocument;
 @class CouchQuery;
 @class Project;
+@class TDListener;
 
 @interface Database : NSObject
 
 @property (weak, readonly) CouchDatabase *database;
+@property (weak, readonly) TDListener *listener;
 
 + (Database *)sharedInstance;
 - (BOOL)connect:(NSError **)outError;

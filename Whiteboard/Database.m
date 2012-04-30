@@ -14,12 +14,16 @@
 #import <CouchCocoa/CouchCocoa.h>
 #import <CouchCocoa/CouchTouchDBServer.h>
 #import <CouchCocoa/CouchDesignDocument_Embedded.h>
+#import "TDListener.h"
+#import <TouchDB/TDServer.h>
+#import <TouchDB/TDRouter.h>
 
 
 @interface Database () {
   CouchReplication* _pull;
   CouchReplication* _push;
   CouchDatabase *_database;
+  TDListener *_listener;
 }
 @end
 
@@ -153,6 +157,50 @@
                   version: @"1.0"];
   CouchQuery *query = [design queryViewNamed:name];
   return query;
+}
+
+
+#pragma mark - Listener
+
+static NSString* GetServerPath() {
+  NSString* bundleID = [[NSBundle mainBundle] bundleIdentifier];  
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory,
+                                                       NSUserDomainMask, YES);
+  NSString* path = [paths objectAtIndex:0];
+  path = [path stringByAppendingPathComponent: bundleID];
+  path = [path stringByAppendingPathComponent: @"TouchDB"];
+  NSError* error = nil;
+  if (![[NSFileManager defaultManager] createDirectoryAtPath: path
+                                 withIntermediateDirectories: YES
+                                                  attributes: nil error: &error]) {
+    NSLog(@"FATAL: Couldn't create TouchDB server dir at %@", path);
+    exit(1);
+  }
+  return path;
+}
+
+
+- (TDListener *)listener
+{
+  if (_listener) {
+    return _listener;
+  } else {
+    
+    NSError* error;
+    TDServer* server = [[TDServer alloc] initWithDirectory: GetServerPath() error: &error];
+    if (error) {
+      NSLog(@"FATAL: Error initializing TouchDB: %@", error);
+      return nil;
+    }
+    
+    int kPortNumber = 59840;
+    
+    _listener = [[TDListener alloc] initWithTDServer: server port:kPortNumber];
+    [_listener start];
+    
+    NSLog(@"TouchServ %@ is listening on port %d ... relax!", [TDRouter versionString], kPortNumber);
+    return _listener;
+  }
 }
 
 
