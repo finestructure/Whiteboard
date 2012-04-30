@@ -8,8 +8,7 @@
 
 #import "RootViewController.h"
 
-#import "cocos2d.h"
-#import "LineDrawer.h"
+#import "WhiteboardLayer.h"
 
 @interface RootViewController ()
 
@@ -17,10 +16,11 @@
 
 @implementation RootViewController
 
+@synthesize canvas = _canvas;
 
 - (void)setupCocos2D
 {
-	CCGLView *glView = [CCGLView viewWithFrame:[self.view bounds]
+	CCGLView *glView = [CCGLView viewWithFrame:[self.canvas bounds]
                                  pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
                                  depthFormat:0	//GL_DEPTH_COMPONENT24_OES
                           preserveBackbuffer:NO
@@ -28,13 +28,20 @@
                                multiSampling:NO
                              numberOfSamples:0];
   glView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  [self.view insertSubview:glView atIndex:0];
-  [[CCDirector sharedDirector] setView:glView];
+  [self.canvas insertSubview:glView atIndex:0];
 
-  CCScene *scene = [CCScene node];
-  [scene addChild:[LineDrawer node]];
-	[[CCDirector sharedDirector] pushScene: scene];
-  [[CCDirector sharedDirector] startAnimation];
+  CCDirector *director = [CCDirector sharedDirector];
+  director.view = glView;
+  director.displayStats = YES;
+  director.animationInterval = 1/60.;
+  director.delegate = self;
+  director.projection = kCCDirectorProjection2D;
+	if(! [director enableRetinaDisplay:YES]) {
+		CCLOG(@"Retina Display Not supported");
+  }
+
+	[director pushScene:[WhiteboardLayer scene]];
+  [director startAnimation];
 }
 
 
@@ -58,6 +65,7 @@
 
 - (void)viewDidUnload
 {
+  [self setCanvas:nil];
   [super viewDidUnload];
   [[CCDirector sharedDirector] end];
 }

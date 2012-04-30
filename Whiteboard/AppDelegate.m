@@ -30,7 +30,7 @@
 
 #pragma mark - Helpers
 
-- (void)setupTextures {
+- (void)setupCocos {
   // Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
@@ -52,22 +52,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  //TODO: is this needed at all?
-  [self setupTextures];
+  [self setupCocos];
   
-	CCDirectorIOS *director = (CCDirectorIOS *)[CCDirector sharedDirector];
-	
-  // Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director enableRetinaDisplay:YES] )
-		CCLOG(@"Retina Display Not supported");
-	
-  [director setDelegate:self];
-	[director setAnimationInterval:1.0/60];
-	[director setDisplayStats:YES];
-
   [self.window makeKeyAndVisible];
-  
-	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
   
   NSError *error = nil;
   if (! [[Database sharedInstance] connect:&error]) {

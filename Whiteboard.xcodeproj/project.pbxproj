@@ -139,6 +139,7 @@
 		5A130D74154B380A00A16684 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A130D73154B380A00A16684 /* MainWindow.xib */; };
 		5A130D86154DB8BF00A16684 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130D84154DB8BF00A16684 /* RootViewController.m */; };
 		5A130D87154DB8BF00A16684 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A130D85154DB8BF00A16684 /* RootViewController.xib */; };
+		5A4815A9154E8513005473F3 /* WhiteboardLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4815A8154E8513005473F3 /* WhiteboardLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -424,6 +425,8 @@
 		5A130D83154DB8BF00A16684 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		5A130D84154DB8BF00A16684 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5A130D85154DB8BF00A16684 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		5A4815A7154E8512005473F3 /* WhiteboardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteboardLayer.h; sourceTree = "<group>"; };
+		5A4815A8154E8513005473F3 /* WhiteboardLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteboardLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -516,6 +519,8 @@
 				5A130CDD154AE26000A16684 /* GCD.m */,
 				5A13053C154836D900A16684 /* AppDelegate.h */,
 				5A13053D154836D900A16684 /* AppDelegate.m */,
+				5A4815A7154E8512005473F3 /* WhiteboardLayer.h */,
+				5A4815A8154E8513005473F3 /* WhiteboardLayer.m */,
 				5A130D73154B380A00A16684 /* MainWindow.xib */,
 				5A130D83154DB8BF00A16684 /* RootViewController.h */,
 				5A130D84154DB8BF00A16684 /* RootViewController.m */,
@@ -1120,6 +1125,7 @@
 				5A130CDE154AE26100A16684 /* GCD.m in Sources */,
 				5A130CE1154AED5200A16684 /* Replay.m in Sources */,
 				5A130D86154DB8BF00A16684 /* RootViewController.m in Sources */,
+				5A4815A9154E8513005473F3 /* WhiteboardLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

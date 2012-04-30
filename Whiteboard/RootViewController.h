@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RootViewController : UIViewController
+#import "cocos2d.h"
+
+@interface RootViewController : UIViewController<CCDirectorDelegate>
+
+@property (nonatomic) IBOutlet UIView *canvas;
 
 @end
