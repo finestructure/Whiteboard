@@ -35,6 +35,13 @@
 }
 
 
+- (IBAction)bonjourTapped:(id)sender
+{
+  NSLog(@"bonjour");
+}
+
+
+
 #pragma mark - Init
 
 
