@@ -23,6 +23,7 @@
 - (BOOL)connect:(NSError **)outError;
 - (void)disconnect;
 - (CouchDesignDocument *)designDocumentWithName:(NSString *)name;
+- (void)updateSyncURL:(NSString *)url;
 
 - (CouchQuery *)events;
 

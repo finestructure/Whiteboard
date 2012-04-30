@@ -21,7 +21,7 @@
 
 @interface Database () {
   CouchReplication* _pull;
-  CouchReplication* _push;
+//  CouchReplication* _push;
   CouchDatabase *_database;
   TDListener *_listener;
 }
@@ -92,7 +92,7 @@
       return NO;
     }
   }
-  [self updateSyncURL];
+  [self updateSyncURL:nil];
   return YES;
 }
 
@@ -111,31 +111,39 @@
 #pragma mark - TouchDB Sync
 
 
-- (void)updateSyncURL {
+- (void)updateSyncURL:(NSString *)url
+{
   NSLog(@"resetting sync");
   if (! self.database) {
     NSLog(@"no database!");
     return;
   }
-  Configuration *conf = [[Globals sharedInstance] currentConfiguration];
-  NSLog(@"configuration: %@", conf.displayName);
-  NSLog(@"remote URL: %@", conf.remoteUrl);
-  NSURL* newRemoteURL = [NSURL URLWithString:conf.remoteUrl];
+  
+  NSURL* newRemoteURL;
+  if (url == nil) {
+    Configuration *conf = [[Globals sharedInstance] currentConfiguration];
+    NSLog(@"configuration: %@", conf.displayName);
+    NSLog(@"remote URL: %@", conf.remoteUrl);
+    newRemoteURL = [NSURL URLWithString:conf.remoteUrl];
+  } else {
+    newRemoteURL = [NSURL URLWithString:url];
+  }
   
   if (newRemoteURL) {
     [self forgetSync];
     _pull = [self.database pullFromDatabaseAtURL:newRemoteURL];
-    _push = [self.database pushToDatabaseAtURL:newRemoteURL];
-    _pull.continuous = _push.continuous = YES;
+    //    _push = [self.database pushToDatabaseAtURL:newRemoteURL];
+    _pull.continuous = YES;
+    //    _push.continuous = YES;
   }
 }
 
 
-- (void) forgetSync {
+- (void)forgetSync {
   [_pull stop];
   _pull = nil;
-  [_push stop];
-  _push = nil;
+//  [_push stop];
+//  _push = nil;
 }
 
 

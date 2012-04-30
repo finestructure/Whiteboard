@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 
+#import "Database.h"
 #import "WhiteboardLayer.h"
 #import "Replay.h"
 
@@ -101,6 +102,10 @@
 	
   NSLog(@"service: %@", service);
   NSLog(@"url: %@", url);
+  
+  [self.popover dismissPopoverAnimated:YES];
+  [[Database sharedInstance] updateSyncURL:url];
+  [self replayTapped:nil];
 }
 
 
