@@ -23,7 +23,10 @@
  *
  */
 
-#import "cocos2d.h"
+#import "WhiteboardLayer.h"
 
-@interface Replay : CCLayer
+@class CCScene;
+
+@interface Replay : WhiteboardLayer
+
 @end

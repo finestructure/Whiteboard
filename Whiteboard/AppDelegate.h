@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
-@interface AppDelegate : NSObject <UIApplicationDelegate, CCDirectorDelegate>
+@interface AppDelegate : NSObject <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) IBOutlet UIWindow *window;
 
 @end

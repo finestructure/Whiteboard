@@ -18,7 +18,6 @@
 		5A13054E154836D900A16684 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13052F154836D900A16684 /* Foundation.framework */; };
 		5A130556154836D900A16684 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A130554154836D900A16684 /* InfoPlist.strings */; };
 		5A130559154836D900A16684 /* WhiteboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130558154836D900A16684 /* WhiteboardTests.m */; };
-		5A13069D1548548F00A16684 /* LineDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A13069C1548548F00A16684 /* LineDrawer.m */; };
 		5A130B4D154A902600A16684 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B4C154A902600A16684 /* OpenGLES.framework */; };
 		5A130B4F154A904300A16684 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B4E154A904300A16684 /* OpenAL.framework */; };
 		5A130B51154A905300A16684 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A130B50154A905300A16684 /* AudioToolbox.framework */; };
@@ -136,6 +135,10 @@
 		5A130CDB154ADD3E00A16684 /* WBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDA154ADD3E00A16684 /* WBEvent.m */; };
 		5A130CDE154AE26100A16684 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CDD154AE26000A16684 /* GCD.m */; };
 		5A130CE1154AED5200A16684 /* Replay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130CE0154AED5100A16684 /* Replay.m */; };
+		5A130D74154B380A00A16684 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A130D73154B380A00A16684 /* MainWindow.xib */; };
+		5A130D86154DB8BF00A16684 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A130D84154DB8BF00A16684 /* RootViewController.m */; };
+		5A130D87154DB8BF00A16684 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A130D85154DB8BF00A16684 /* RootViewController.xib */; };
+		5A4815A9154E8513005473F3 /* WhiteboardLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4815A8154E8513005473F3 /* WhiteboardLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,8 +168,6 @@
 		5A130555154836D900A16684 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A130557154836D900A16684 /* WhiteboardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteboardTests.h; sourceTree = "<group>"; };
 		5A130558154836D900A16684 /* WhiteboardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteboardTests.m; sourceTree = "<group>"; };
-		5A13069B1548548F00A16684 /* LineDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineDrawer.h; sourceTree = "<group>"; };
-		5A13069C1548548F00A16684 /* LineDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineDrawer.m; sourceTree = "<group>"; };
 		5A130B4C154A902600A16684 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		5A130B4E154A904300A16684 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		5A130B50154A905300A16684 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -417,6 +418,12 @@
 		5A130CDD154AE26000A16684 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
 		5A130CDF154AED5100A16684 /* Replay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Replay.h; sourceTree = "<group>"; };
 		5A130CE0154AED5100A16684 /* Replay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Replay.m; sourceTree = "<group>"; };
+		5A130D73154B380A00A16684 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		5A130D83154DB8BF00A16684 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		5A130D84154DB8BF00A16684 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		5A130D85154DB8BF00A16684 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		5A4815A7154E8512005473F3 /* WhiteboardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteboardLayer.h; sourceTree = "<group>"; };
+		5A4815A8154E8513005473F3 /* WhiteboardLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteboardLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,11 +516,15 @@
 				5A130CDD154AE26000A16684 /* GCD.m */,
 				5A13053C154836D900A16684 /* AppDelegate.h */,
 				5A13053D154836D900A16684 /* AppDelegate.m */,
+				5A4815A7154E8512005473F3 /* WhiteboardLayer.h */,
+				5A4815A8154E8513005473F3 /* WhiteboardLayer.m */,
+				5A130D73154B380A00A16684 /* MainWindow.xib */,
+				5A130D83154DB8BF00A16684 /* RootViewController.h */,
+				5A130D84154DB8BF00A16684 /* RootViewController.m */,
+				5A130D85154DB8BF00A16684 /* RootViewController.xib */,
 				5A130534154836D900A16684 /* Supporting Files */,
 				5A130CB3154ACFDD00A16684 /* LinePoint.h */,
 				5A130CB4154ACFDD00A16684 /* LinePoint.m */,
-				5A13069B1548548F00A16684 /* LineDrawer.h */,
-				5A13069C1548548F00A16684 /* LineDrawer.m */,
 				5A130CDF154AED5100A16684 /* Replay.h */,
 				5A130CE0154AED5100A16684 /* Replay.m */,
 				5A130CAC154ACD4100A16684 /* CCRenderTextureWithDepth.h */,
@@ -964,6 +975,8 @@
 				5A130538154836D900A16684 /* InfoPlist.strings in Resources */,
 				5A130C9E154A9E2C00A16684 /* ChangeLog in Resources */,
 				5A130C9F154A9E2C00A16684 /* CMakeLists.txt in Resources */,
+				5A130D74154B380A00A16684 /* MainWindow.xib in Resources */,
+				5A130D87154DB8BF00A16684 /* RootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1000,7 +1013,6 @@
 			files = (
 				5A13053A154836D900A16684 /* main.m in Sources */,
 				5A13053E154836D900A16684 /* AppDelegate.m in Sources */,
-				5A13069D1548548F00A16684 /* LineDrawer.m in Sources */,
 				5A130C49154A9E2C00A16684 /* CCAction.m in Sources */,
 				5A130C4A154A9E2C00A16684 /* CCActionCamera.m in Sources */,
 				5A130C4B154A9E2C00A16684 /* CCActionEase.m in Sources */,
@@ -1106,6 +1118,8 @@
 				5A130CDB154ADD3E00A16684 /* WBEvent.m in Sources */,
 				5A130CDE154AE26100A16684 /* GCD.m in Sources */,
 				5A130CE1154AED5200A16684 /* Replay.m in Sources */,
+				5A130D86154DB8BF00A16684 /* RootViewController.m in Sources */,
+				5A4815A9154E8513005473F3 /* WhiteboardLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

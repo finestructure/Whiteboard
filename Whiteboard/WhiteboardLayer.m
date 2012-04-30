@@ -1,109 +1,80 @@
-/*
- * Smooth drawing: http://merowing.info
- *
- * Copyright (c) 2012 Krzysztof Zabłocki
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
-#import <CoreGraphics/CoreGraphics.h>
+//
+//  WhiteboardLayer.m
+//  CocosTest
+//
+//  Created by Sven A. Schmidt on 30.04.12.
+//  Copyright (c) 2012 abstracture GmbH & Co. KG. All rights reserved.
+//
+
+#import "WhiteboardLayer.h"
 
 #import "cocos2d.h"
 
 #import "CCRenderTextureWithDepth.h"
 #import "Database.h"
 #import "Globals.h"
-#import "LineDrawer.h"
 #import "LinePoint.h"
 #import "WBEvent.h"
 
 
-float kWidth = 2;
-float kOverdraw = 1;
-
-
 typedef struct _LineVertex {
-  CGPoint pos;
-  float z;
-  ccColor4F color;
+CGPoint pos;
+float z;
+ccColor4F color;
 } LineVertex;
 
 
-@implementation LineDrawer {
-  NSMutableArray *points;
-  NSMutableArray *velocities;
-  NSMutableArray *circlesPoints;
+@implementation WhiteboardLayer
 
-  BOOL connectingLine;
-  CGPoint prevC, prevD;
-  CGPoint prevG;
-  CGPoint prevI;
-  float overdraw;
+@synthesize penWidth = _penWidth;
+@synthesize overdraw = _overdraw;
+@synthesize points = _points;
+@synthesize velocities = _velocities;
+@synthesize circlesPoints = _circlesPoints;
+@synthesize connectingLine = _connectingLine;
+@synthesize finishingLine = _finishingLine;
+@synthesize prevC = _prevC;
+@synthesize prevD = _prevD;
+@synthesize prevG = _prevG;
+@synthesize prevI = _prevI;
+@synthesize renderTexture = _renderTexture;
 
-  CCRenderTexture *renderTexture;
-  BOOL finishingLine;
+
++ (CCScene *)scene
+{
+  CCScene *scene = [CCScene node];
+  WhiteboardLayer *layer = [WhiteboardLayer node];
+  [scene addChild:layer];
+  return scene;
 }
 
-- (id)init
+
+- (id)init 
 {
   self = [super init];
   if (self) {
-    points = [NSMutableArray array];
-    velocities = [NSMutableArray array];
-    circlesPoints = [NSMutableArray array];
+    _penWidth = 2;
+    _overdraw = 1;
+    _points = [NSMutableArray array];
+    _velocities = [NSMutableArray array];
+    _circlesPoints = [NSMutableArray array];
 
     shaderProgram_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
-    overdraw = kOverdraw;
 
-    renderTexture = [[CCRenderTextureWithDepth alloc] initWithWidth:(int)self.contentSize.width height:(int)self.contentSize.height andDepthFormat:GL_DEPTH_COMPONENT24_OES];
-    renderTexture.anchorPoint = ccp(0, 0);
-    renderTexture.position = ccp(1024 * 0.5f, 768 * 0.5f);
-    [renderTexture clear:1.0f g:1.0f b:1.0f a:0];
-    [self addChild:renderTexture];
+    _renderTexture = [[CCRenderTextureWithDepth alloc] initWithWidth:(int)self.contentSize.width height:(int)self.contentSize.height andDepthFormat:GL_DEPTH_COMPONENT24_OES];
+    _renderTexture.anchorPoint = ccp(0, 0);
+    _renderTexture.position = ccp(self.contentSize.width/2, self.contentSize.height/2);
+    [_renderTexture clear:1.0f g:1.0f b:1.0f a:0];
+    [self addChild:_renderTexture];
 
     self.isTouchEnabled = YES;
   }
   return self;
 }
 
-#pragma mark - Handling points
-- (void)startNewLineFrom:(CGPoint)newPoint withSize:(CGFloat)aSize
-{
-  connectingLine = NO;
-  [self addPoint:newPoint withSize:aSize];
-}
-
-- (void)endLineAt:(CGPoint)aEndPoint withSize:(CGFloat)aSize
-{
-  [self addPoint:aEndPoint withSize:aSize];
-  finishingLine = YES;
-}
-
-- (void)addPoint:(CGPoint)newPoint withSize:(CGFloat)size
-{
-  LinePoint *point = [[LinePoint alloc] init];
-  point.pos = newPoint;
-  point.width = size;
-  [points addObject:point];
-}
 
 #pragma mark - Drawing
+
 
 #define ADD_TRIANGLE(A, B, C, Z) vertices[index].pos = A, vertices[index++].z = Z, vertices[index].pos = B, vertices[index++].z = Z, vertices[index].pos = C, vertices[index++].z = Z
 
@@ -111,7 +82,7 @@ typedef struct _LineVertex {
 {
   unsigned int numberOfVertices = ([linePoints count] - 1) * 18;
   LineVertex *vertices = calloc(sizeof(LineVertex), numberOfVertices);
-
+  
   CGPoint prevPoint = [(LinePoint *)[linePoints objectAtIndex:0] pos];
   float prevValue = [(LinePoint *)[linePoints objectAtIndex:0] width];
   float curValue;
@@ -120,77 +91,136 @@ typedef struct _LineVertex {
     LinePoint *pointValue = [linePoints objectAtIndex:i];
     CGPoint curPoint = [pointValue pos];
     curValue = [pointValue width];
-
+    
     //! equal points, skip them
     if (ccpFuzzyEqual(curPoint, prevPoint, 0.0001f)) {
       continue;
     }
-
+    
     CGPoint dir = ccpSub(curPoint, prevPoint);
     CGPoint perpendicular = ccpNormalize(ccpPerp(dir));
     CGPoint A = ccpAdd(prevPoint, ccpMult(perpendicular, prevValue / 2));
     CGPoint B = ccpSub(prevPoint, ccpMult(perpendicular, prevValue / 2));
     CGPoint C = ccpAdd(curPoint, ccpMult(perpendicular, curValue / 2));
     CGPoint D = ccpSub(curPoint, ccpMult(perpendicular, curValue / 2));
-
+    
     //! continuing line
-    if (connectingLine) {
-      A = prevC;
-      B = prevD;
+    if (_connectingLine) {
+      A = _prevC;
+      B = _prevD;
     } else if (index == 0) {
       //! circle at start of line, revert direction
-      [circlesPoints addObject:pointValue];
-      [circlesPoints addObject:[linePoints objectAtIndex:i - 1]];
+      [_circlesPoints addObject:pointValue];
+      [_circlesPoints addObject:[linePoints objectAtIndex:i - 1]];
     }
-
+    
     ADD_TRIANGLE(A, B, C, 1.0f);
     ADD_TRIANGLE(B, C, D, 1.0f);
-
-    prevD = D;
-    prevC = C;
-    if (finishingLine && (i == [linePoints count] - 1)) {
-      [circlesPoints addObject:[linePoints objectAtIndex:i - 1]];
-      [circlesPoints addObject:pointValue];
-      finishingLine = NO;
+    
+    _prevD = D;
+    _prevC = C;
+    if (_finishingLine && (i == [linePoints count] - 1)) {
+      [_circlesPoints addObject:[linePoints objectAtIndex:i - 1]];
+      [_circlesPoints addObject:pointValue];
+      _finishingLine = NO;
     }
     prevPoint = curPoint;
     prevValue = curValue;
-
+    
     //! Add overdraw
-    CGPoint F = ccpAdd(A, ccpMult(perpendicular, overdraw));
-    CGPoint G = ccpAdd(C, ccpMult(perpendicular, overdraw));
-    CGPoint H = ccpSub(B, ccpMult(perpendicular, overdraw));
-    CGPoint I = ccpSub(D, ccpMult(perpendicular, overdraw));
-
+    CGPoint F = ccpAdd(A, ccpMult(perpendicular, _overdraw));
+    CGPoint G = ccpAdd(C, ccpMult(perpendicular, _overdraw));
+    CGPoint H = ccpSub(B, ccpMult(perpendicular, _overdraw));
+    CGPoint I = ccpSub(D, ccpMult(perpendicular, _overdraw));
+    
     //! end vertices of last line are the start of this one, also for the overdraw
-    if (connectingLine) {
-      F = prevG;
-      H = prevI;
+    if (_connectingLine) {
+      F = _prevG;
+      H = _prevI;
     }
-
-    prevG = G;
-    prevI = I;
-
+    
+    _prevG = G;
+    _prevI = I;
+    
     ADD_TRIANGLE(F, A, G, 2.0f);
     ADD_TRIANGLE(A, G, C, 2.0f);
     ADD_TRIANGLE(B, H, D, 2.0f);
     ADD_TRIANGLE(H, D, I, 2.0f);
   }
   [self fillLineTriangles:vertices count:index withColor:color];
-
+  
   if (index > 0) {
-    connectingLine = YES;
+    _connectingLine = YES;
   }
-
+  
   free(vertices);
 }
+
+
+- (void)fillLineTriangles:(LineVertex *)vertices count:(NSUInteger)count withColor:(ccColor4F)color
+{
+  [shaderProgram_ use];
+  [shaderProgram_ setUniformForModelViewProjectionMatrix];
+  
+  ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
+  
+  ccColor4F fullColor = color;
+  ccColor4F fadeOutColor = color;
+  fadeOutColor.a = 0;
+  
+  for (int i = 0; i < count / 18; ++i) {
+    for (int j = 0; j < 6; ++j) {
+      vertices[i * 18 + j].color = color;
+    }
+    
+    //! FAG
+    vertices[i * 18 + 6].color = fadeOutColor;
+    vertices[i * 18 + 7].color = fullColor;
+    vertices[i * 18 + 8].color = fadeOutColor;
+    
+    //! AGD
+    vertices[i * 18 + 9].color = fullColor;
+    vertices[i * 18 + 10].color = fadeOutColor;
+    vertices[i * 18 + 11].color = fullColor;
+    
+    //! BHC
+    vertices[i * 18 + 12].color = fullColor;
+    vertices[i * 18 + 13].color = fadeOutColor;
+    vertices[i * 18 + 14].color = fullColor;
+    
+    //! HCI
+    vertices[i * 18 + 15].color = fadeOutColor;
+    vertices[i * 18 + 16].color = fullColor;
+    vertices[i * 18 + 17].color = fadeOutColor;
+  }
+  
+  glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, sizeof(LineVertex), &vertices[0].pos);
+  glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, sizeof(LineVertex), &vertices[0].color);
+  
+  
+  glDepthFunc(GL_LEQUAL);
+  glEnable(GL_DEPTH_TEST);
+  glDrawArrays(GL_TRIANGLES, 0, (GLsizei)count);
+  
+  for (unsigned int i = 0; i < [_circlesPoints count] / 2; ++i) {
+    LinePoint *prevPoint = [_circlesPoints objectAtIndex:i * 2];
+    LinePoint *curPoint = [_circlesPoints objectAtIndex:i * 2 + 1];
+    CGPoint dirVector = ccpNormalize(ccpSub(curPoint.pos, prevPoint.pos));
+    
+    [self fillLineEndPointAt:curPoint.pos direction:dirVector radius:curPoint.width * 0.5f andColor:color];
+  }
+  [_circlesPoints removeAllObjects];
+  
+  glDisable(GL_DEPTH_TEST);
+}
+
 
 - (void)fillLineEndPointAt:(CGPoint)center direction:(CGPoint)aLineDir radius:(CGFloat)radius andColor:(ccColor4F)color
 {
   int numberOfSegments = 32;
   LineVertex *vertices = malloc(sizeof(LineVertex) * numberOfSegments * 9);
   float anglePerSegment = (float)(M_PI / (numberOfSegments - 1));
-
+  
   //! we need to cover M_PI from this, dot product of normalized vectors is equal to cos angle between them... and if you include rightVec dot you get to know the correct direction :)
   CGPoint perpendicular = ccpPerp(aLineDir);
   float angle = acosf(ccpDot(perpendicular, CGPointMake(0, 1)));
@@ -198,7 +228,7 @@ typedef struct _LineVertex {
   if (rightDot < 0.0f) {
     angle *= -1;
   }
-
+  
   CGPoint prevPoint = center;
   CGPoint prevDir = ccp(sinf(0), cosf(0));
   for (unsigned int i = 0; i < numberOfSegments; ++i) {
@@ -207,117 +237,60 @@ typedef struct _LineVertex {
     vertices[i * 9 + 0].pos = center;
     vertices[i * 9 + 1].pos = prevPoint;
     vertices[i * 9 + 2].pos = curPoint;
-
+    
     //! fill rest of vertex data
     for (unsigned int j = 0; j < 9; ++j) {
       vertices[i * 9 + j].z = j < 3 ? 1.0f : 2.0f;
       vertices[i * 9 + j].color = color;
     }
-
+    
     //! add overdraw
-    vertices[i * 9 + 3].pos = ccpAdd(prevPoint, ccpMult(prevDir, overdraw));
+    vertices[i * 9 + 3].pos = ccpAdd(prevPoint, ccpMult(prevDir, _overdraw));
     vertices[i * 9 + 3].color.a = 0;
     vertices[i * 9 + 4].pos = prevPoint;
-    vertices[i * 9 + 5].pos = ccpAdd(curPoint, ccpMult(dir, overdraw));
+    vertices[i * 9 + 5].pos = ccpAdd(curPoint, ccpMult(dir, _overdraw));
     vertices[i * 9 + 5].color.a = 0;
-
+    
     vertices[i * 9 + 6].pos = prevPoint;
     vertices[i * 9 + 7].pos = curPoint;
-    vertices[i * 9 + 8].pos = ccpAdd(curPoint, ccpMult(dir, overdraw));
+    vertices[i * 9 + 8].pos = ccpAdd(curPoint, ccpMult(dir, _overdraw));
     vertices[i * 9 + 8].color.a = 0;
-
+    
     prevPoint = curPoint;
     prevDir = dir;
     angle += anglePerSegment;
   }
-
+  
   glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, sizeof(LineVertex), &vertices[0].pos);
   glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, sizeof(LineVertex), &vertices[0].color);
   glDrawArrays(GL_TRIANGLES, 0, numberOfSegments * 9);
-
+  
   free(vertices);
-}
-
-- (void)fillLineTriangles:(LineVertex *)vertices count:(NSUInteger)count withColor:(ccColor4F)color
-{
-  [shaderProgram_ use];
-  [shaderProgram_ setUniformForModelViewProjectionMatrix];
-
-  ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
-
-  ccColor4F fullColor = color;
-  ccColor4F fadeOutColor = color;
-  fadeOutColor.a = 0;
-
-  for (int i = 0; i < count / 18; ++i) {
-    for (int j = 0; j < 6; ++j) {
-      vertices[i * 18 + j].color = color;
-    }
-
-    //! FAG
-    vertices[i * 18 + 6].color = fadeOutColor;
-    vertices[i * 18 + 7].color = fullColor;
-    vertices[i * 18 + 8].color = fadeOutColor;
-
-    //! AGD
-    vertices[i * 18 + 9].color = fullColor;
-    vertices[i * 18 + 10].color = fadeOutColor;
-    vertices[i * 18 + 11].color = fullColor;
-
-    //! BHC
-    vertices[i * 18 + 12].color = fullColor;
-    vertices[i * 18 + 13].color = fadeOutColor;
-    vertices[i * 18 + 14].color = fullColor;
-
-    //! HCI
-    vertices[i * 18 + 15].color = fadeOutColor;
-    vertices[i * 18 + 16].color = fullColor;
-    vertices[i * 18 + 17].color = fadeOutColor;
-  }
-
-  glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, sizeof(LineVertex), &vertices[0].pos);
-  glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, sizeof(LineVertex), &vertices[0].color);
-
-
-  glDepthFunc(GL_LEQUAL);
-  glEnable(GL_DEPTH_TEST);
-  glDrawArrays(GL_TRIANGLES, 0, (GLsizei)count);
-
-  for (unsigned int i = 0; i < [circlesPoints count] / 2; ++i) {
-    LinePoint *prevPoint = [circlesPoints objectAtIndex:i * 2];
-    LinePoint *curPoint = [circlesPoints objectAtIndex:i * 2 + 1];
-    CGPoint dirVector = ccpNormalize(ccpSub(curPoint.pos, prevPoint.pos));
-
-    [self fillLineEndPointAt:curPoint.pos direction:dirVector radius:curPoint.width * 0.5f andColor:color];
-  }
-  [circlesPoints removeAllObjects];
-
-  glDisable(GL_DEPTH_TEST);
 }
 
 - (NSMutableArray *)calculateSmoothLinePoints
 {
-  if ([points count] > 2) {
+  if ([_points count] > 2) {
     NSMutableArray *smoothedPoints = [NSMutableArray array];
-    for (unsigned int i = 2; i < [points count]; ++i) {
-      LinePoint *prev2 = [points objectAtIndex:i - 2];
-      LinePoint *prev1 = [points objectAtIndex:i - 1];
-      LinePoint *cur = [points objectAtIndex:i];
-
+    for (unsigned int i = 2; i < [_points count]; ++i) {
+      LinePoint *prev2 = [_points objectAtIndex:i - 2];
+      LinePoint *prev1 = [_points objectAtIndex:i - 1];
+      LinePoint *cur = [_points objectAtIndex:i];
+      
       CGPoint midPoint1 = ccpMult(ccpAdd(prev1.pos, prev2.pos), 0.5f);
       CGPoint midPoint2 = ccpMult(ccpAdd(cur.pos, prev1.pos), 0.5f);
-
+      
       int segmentDistance = 2;
       float distance = ccpDistance(midPoint1, midPoint2);
       int numberOfSegments = MIN(128, MAX(floorf(distance / segmentDistance), 32));
-
+      
       float t = 0.0f;
       float step = 1.0f / numberOfSegments;
       for (NSUInteger j = 0; j < numberOfSegments; j++) {
         LinePoint *newPoint = [[LinePoint alloc] init];
         newPoint.pos = ccpAdd(ccpAdd(ccpMult(midPoint1, powf(1 - t, 2)), ccpMult(prev1.pos, 2.0f * (1 - t) * t)), ccpMult(midPoint2, t * t));
         newPoint.width = powf(1 - t, 2) * ((prev1.width + prev2.width) * 0.5f) + 2.0f * (1 - t) * t * prev1.width + t * t * ((cur.width + prev1.width) * 0.5f);
-
+        
         [smoothedPoints addObject:newPoint];
         t += step;
       }
@@ -327,23 +300,47 @@ typedef struct _LineVertex {
       [smoothedPoints addObject:finalPoint];
     }
     //! we need to leave last 2 points for next draw
-    [points removeObjectsInRange:NSMakeRange(0, [points count] - 2)];
+    [_points removeObjectsInRange:NSMakeRange(0, [_points count] - 2)];
     return smoothedPoints;
   } else {
     return nil;
   }
 }
 
+
 - (void)draw
 {
   ccColor4F color = {0, 0, 0, 1};
-  [renderTexture begin];
-
+  [_renderTexture begin];
   NSMutableArray *smoothedPoints = [self calculateSmoothLinePoints];
   if (smoothedPoints) {
     [self drawLines:smoothedPoints withColor:color];
   }
-  [renderTexture end];
+  [_renderTexture end];
+}
+
+
+#pragma mark - Handling points
+
+
+- (void)startNewLineFrom:(CGPoint)newPoint withSize:(CGFloat)aSize
+{
+  _connectingLine = NO;
+  [self addPoint:newPoint withSize:aSize];
+}
+
+- (void)endLineAt:(CGPoint)aEndPoint withSize:(CGFloat)aSize
+{
+  [self addPoint:aEndPoint withSize:aSize];
+  _finishingLine = YES;
+}
+
+- (void)addPoint:(CGPoint)newPoint withSize:(CGFloat)size
+{
+  LinePoint *point = [[LinePoint alloc] init];
+  point.pos = newPoint;
+  point.width = size;
+  [_points addObject:point];
 }
 
 
@@ -383,12 +380,12 @@ typedef struct _LineVertex {
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
   CGPoint point = [self getPoint:touch];
   
-  [points removeAllObjects];
-  [velocities removeAllObjects];
+  [_points removeAllObjects];
+  [_velocities removeAllObjects];
   
-  [self startNewLineFrom:point withSize:kWidth];
-  [self addPoint:point withSize:kWidth];
-  [self addPoint:point withSize:kWidth];
+  [self startNewLineFrom:point withSize:_penWidth];
+  [self addPoint:point withSize:_penWidth];
+  [self addPoint:point withSize:_penWidth];
   
   [self saveEvent:touch];
   return YES;
@@ -398,16 +395,16 @@ typedef struct _LineVertex {
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
   CGPoint point = [self getPoint:touch];
   float eps = 1.5f;
-  if ([points count] > 0) {
-    float length = ccpLength(ccpSub([(LinePoint *)[points lastObject] pos], point));
+  if ([_points count] > 0) {
+    float length = ccpLength(ccpSub([(LinePoint *)[_points lastObject] pos], point));
     
     if (length < eps) {
       return;
     }
   }
   //TODO: vary size
-  [self addPoint:point withSize:kWidth];
-
+  [self addPoint:point withSize:_penWidth];
+  
   [self saveEvent:touch];  
 }
 
@@ -415,8 +412,8 @@ typedef struct _LineVertex {
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
   CGPoint point = [self getPoint:touch];
   //TODO: vary size
-  [self endLineAt:point withSize:kWidth];
-
+  [self endLineAt:point withSize:_penWidth];
+  
   [self saveEvent:touch];
 }
 

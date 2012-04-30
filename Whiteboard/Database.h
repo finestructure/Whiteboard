@@ -15,7 +15,7 @@
 
 @interface Database : NSObject
 
-@property (readonly) CouchDatabase *database;
+@property (weak, readonly) CouchDatabase *database;
 
 + (Database *)sharedInstance;
 - (BOOL)connect:(NSError **)outError;

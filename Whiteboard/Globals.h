@@ -15,7 +15,7 @@ extern NSString * const kConfigurationDefaultsKey;
 
 @interface Globals : NSObject
 
-@property (readonly) NSString *version;
+@property (weak, readonly) NSString *version;
 
 + (Globals *)sharedInstance;
 
