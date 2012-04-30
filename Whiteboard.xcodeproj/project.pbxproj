@@ -1220,6 +1220,7 @@
 				INFOPLIST_FILE = "Whiteboard/Whiteboard-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = libs/kazmath/include;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1237,6 +1238,7 @@
 				INFOPLIST_FILE = "Whiteboard/Whiteboard-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = libs/kazmath/include;
 				WRAPPER_EXTENSION = app;
 			};
