@@ -10,3 +10,6 @@
 [submodule "Vendor/CocoaHTTPServer"]
 	path = Vendor/CocoaHTTPServer
 	url = git://github.com/robbiehanson/CocoaHTTPServer.git
+[submodule "Vendor/MYUtilities"]
+	path = Vendor/MYUtilities
+	url = git://github.com/snej/MYUtilities.git
