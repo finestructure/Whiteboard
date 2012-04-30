@@ -7,3 +7,6 @@
 [submodule "Vendor/CouchCocoa"]
 	path = Vendor/CouchCocoa
 	url = https://github.com/couchbaselabs/CouchCocoa.git
+[submodule "Vendor/CocoaHTTPServer"]
+	path = Vendor/CocoaHTTPServer
+	url = git://github.com/robbiehanson/CocoaHTTPServer.git
