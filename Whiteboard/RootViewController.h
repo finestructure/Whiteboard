@@ -14,4 +14,6 @@
 
 @property (nonatomic) IBOutlet UIView *canvas;
 
+- (IBAction)replayTapped:(id)sender;
+
 @end

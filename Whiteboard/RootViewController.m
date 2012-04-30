@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 
 #import "WhiteboardLayer.h"
+#import "Replay.h"
 
 @interface RootViewController ()
 
@@ -17,6 +18,25 @@
 @implementation RootViewController
 
 @synthesize canvas = _canvas;
+
+#pragma mark - Actions
+
+
+- (IBAction)replayTapped:(id)sender
+{
+  CCDirector *director = [CCDirector sharedDirector];
+  [director end];
+  [director.view removeFromSuperview];
+  director.view = nil;
+
+  [self setupCocos2D];  
+	[director pushScene:[Replay scene]];
+  [director startAnimation];
+}
+
+
+#pragma mark - Init
+
 
 - (void)setupCocos2D
 {
@@ -39,11 +59,7 @@
 	if(! [director enableRetinaDisplay:YES]) {
 		CCLOG(@"Retina Display Not supported");
   }
-
-	[director pushScene:[WhiteboardLayer scene]];
-  [director startAnimation];
 }
-
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,6 +76,8 @@
 {
   [super viewDidLoad];
   [self setupCocos2D];
+	[[CCDirector sharedDirector] pushScene:[WhiteboardLayer scene]];
+  [[CCDirector sharedDirector] startAnimation];
 }
 
 
@@ -82,5 +100,6 @@
 {
 	return YES;
 }
+
 
 @end
