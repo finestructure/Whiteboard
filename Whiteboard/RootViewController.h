@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BonjourBrowser.h"
 #import "cocos2d.h"
 
-@interface RootViewController : UIViewController<CCDirectorDelegate>
+@interface RootViewController : UIViewController<CCDirectorDelegate, BonjourBrowserDelegate>
 
 @property (nonatomic) IBOutlet UIView *canvas;
 @property (nonatomic, strong) UIPopoverController *popover;
