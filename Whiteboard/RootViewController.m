@@ -34,6 +34,7 @@
   CCScene *scene = [CCScene node];
   [scene addChild:[LineDrawer node]];
 	[[CCDirector sharedDirector] pushScene: scene];
+  [[CCDirector sharedDirector] startAnimation];
 }
 
 

@@ -70,10 +70,10 @@ typedef struct _LineVertex {
 
     shaderProgram_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
     overdraw = kOverdraw;
-
+    
     renderTexture = [[CCRenderTextureWithDepth alloc] initWithWidth:(int)self.contentSize.width height:(int)self.contentSize.height andDepthFormat:GL_DEPTH_COMPONENT24_OES];
     renderTexture.anchorPoint = ccp(0, 0);
-    renderTexture.position = ccp(1024 * 0.5f, 768 * 0.5f);
+    renderTexture.position = ccp(self.contentSize.width/2, self.contentSize.height/2);
     [renderTexture clear:1.0f g:1.0f b:1.0f a:0];
     [self addChild:renderTexture];
 
