@@ -60,7 +60,7 @@
     NSLog(@"Failed to connect to database: %@", [error localizedDescription]);
   }
   
-  id listener = [Database sharedInstance].listener;
+  [[Database sharedInstance] listen];
   
   UIDevice *device = [UIDevice currentDevice];
   self.netService = [[NSNetService alloc] initWithDomain:@"local" type:@"_whiteboard._tcp" name:device.name port:59840];

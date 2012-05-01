@@ -188,27 +188,25 @@ static NSString* GetServerPath() {
 }
 
 
-- (TDListener *)listener
+- (void)listen
 {
   if (_listener) {
-    return _listener;
-  } else {
-    
-    NSError* error;
-    TDServer* server = [[TDServer alloc] initWithDirectory: GetServerPath() error: &error];
-    if (error) {
-      NSLog(@"FATAL: Error initializing TouchDB: %@", error);
-      return nil;
-    }
-    
-    int kPortNumber = 59840;
-    
-    _listener = [[TDListener alloc] initWithTDServer: server port:kPortNumber];
-    [_listener start];
-    
-    NSLog(@"TouchServ %@ is listening on port %d ... relax!", [TDRouter versionString], kPortNumber);
-    return _listener;
+    [_listener stop];
   }
+  
+  NSError* error;
+  TDServer* server = [[TDServer alloc] initWithDirectory: GetServerPath() error: &error];
+  if (error) {
+    NSLog(@"FATAL: Error initializing TouchDB: %@", error);
+    return;
+  }
+  
+  int kPortNumber = 59840;
+  
+  _listener = [[TDListener alloc] initWithTDServer: server port:kPortNumber];
+  [_listener start];
+    
+  NSLog(@"TouchServ %@ is listening on port %d ... relax!", [TDRouter versionString], kPortNumber);
 }
 
 

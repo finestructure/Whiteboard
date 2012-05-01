@@ -17,13 +17,13 @@
 @interface Database : NSObject
 
 @property (weak, readonly) CouchDatabase *database;
-@property (weak, readonly) TDListener *listener;
 
 + (Database *)sharedInstance;
 - (BOOL)connect:(NSError **)outError;
 - (void)disconnect;
 - (CouchDesignDocument *)designDocumentWithName:(NSString *)name;
 - (void)updateSyncURL:(NSString *)url;
+- (void)listen;
 
 - (CouchQuery *)events;
 
