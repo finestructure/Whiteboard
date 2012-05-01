@@ -17,6 +17,7 @@
 #import "TDListener.h"
 #import <TouchDB/TDServer.h>
 #import <TouchDB/TDRouter.h>
+#import <TouchDB/TDDatabase.h>
 
 
 @interface Database () {
@@ -83,12 +84,25 @@
       }
       return NO;
     }
-    _database = [server databaseNamed:conf.localDbname];
-    NSError *error;
-    if (![_database ensureCreated:&error]) {
-      if (outError != nil) {
-        *outError = server.error;
+    [server tellTDServer:^(TDServer *tdServer) {
+      [tdServer tellDatabaseNamed:conf.localDbname to:^(TDDatabase *db) {
+        NSError *error = nil;
+        [db deleteDatabase:&error];
+      }];
+    }];
+    
+    __block BOOL created = YES;
+    [server tellTDServer:^(TDServer *tdServer) {
+      _database = [server databaseNamed:conf.localDbname];
+      NSError *error;
+      if (![_database ensureCreated:&error]) {
+        if (outError != nil) {
+          *outError = server.error;
+        }
+        created = NO;
       }
+    }];
+    if (! created) {
       return NO;
     }
   }
@@ -205,7 +219,7 @@ static NSString* GetServerPath() {
   
   _listener = [[TDListener alloc] initWithTDServer: server port:kPortNumber];
   [_listener start];
-    
+  
   NSLog(@"TouchServ %@ is listening on port %d ... relax!", [TDRouter versionString], kPortNumber);
 }
 
