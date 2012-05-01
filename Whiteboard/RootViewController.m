@@ -11,6 +11,7 @@
 #import "Database.h"
 #import "WhiteboardLayer.h"
 #import "Replay.h"
+#import "EchoLayer.h"
 
 @interface RootViewController ()
 
@@ -49,6 +50,21 @@
   bb.delegate = self;
   self.popover = [[UIPopoverController alloc] initWithContentViewController:bb];
   [self.popover presentPopoverFromRect:view.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+
+
+- (void)echoEvents
+{
+  NSLog(@"Starting echo");
+  CCDirector *director = [CCDirector sharedDirector];
+  [director end];
+  [director.view removeFromSuperview];
+  director.view = nil;
+  
+  [self setupCocos2D];  
+	[director pushScene:[EchoLayer scene]];
+  [director startAnimation];
 }
 
 
@@ -105,7 +121,7 @@
   
   [self.popover dismissPopoverAnimated:YES];
   [[Database sharedInstance] updateSyncURL:url];
-  [self replayTapped:nil];
+  [self echoEvents];
 }
 
 
