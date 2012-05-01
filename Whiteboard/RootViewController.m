@@ -8,6 +8,8 @@
 
 #import "RootViewController.h"
 
+#include <arpa/inet.h>
+
 #import "Database.h"
 #import "WhiteboardLayer.h"
 #import "Replay.h"
@@ -107,12 +109,29 @@
     path = tempPath;
 	}
 	
+  NSString *ipAddress = nil;
+  for (NSData* data in [service addresses]) {
+    char addressBuffer[100];
+    struct sockaddr_in* socketAddress = (struct sockaddr_in*) [data bytes];
+    int sockFamily = socketAddress->sin_family;
+    if (sockFamily == AF_INET /* || sockFamily == AF_INET6 */) {
+      const char* addressStr = inet_ntop(sockFamily,
+                                         &(socketAddress->sin_addr), addressBuffer,
+                                         sizeof(addressBuffer));
+      int port = ntohs(socketAddress->sin_port);
+      if (addressStr && port) {
+        NSLog(@"Found service at %s:%d", addressStr, port);
+        ipAddress = [NSString stringWithCString:addressStr encoding:NSASCIIStringEncoding];
+      }
+    }
+  }
+
 	NSString* url = [[NSString alloc] initWithFormat:@"http://%@%@%@%@%@%@%@",
                    user?user:@"",
                    pass?@":":@"",
                    pass?pass:@"",
                    (user||pass)?@"@":@"",
-                   host,
+                   ipAddress?ipAddress:host,
                    portStr,
                    path];
 	

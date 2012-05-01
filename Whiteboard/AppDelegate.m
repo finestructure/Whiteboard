@@ -14,7 +14,9 @@
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
+#import "Configuration.h"
 #import "Database.h"
+#import "Globals.h"
 
 @interface AppDelegate () {
 }
@@ -63,7 +65,10 @@
   [[Database sharedInstance] listen];
   
   UIDevice *device = [UIDevice currentDevice];
+  Configuration *conf = [[Globals sharedInstance] currentConfiguration];
   self.netService = [[NSNetService alloc] initWithDomain:@"local" type:@"_whiteboard._tcp" name:device.name port:59840];
+  NSData *data = [NSNetService dataFromTXTRecordDictionary:[NSDictionary dictionaryWithObject:conf.localDbname forKey:@"path"]];
+  [self.netService setTXTRecordData:data];
   [self.netService publish];
 	return YES;
 }
