@@ -34,8 +34,15 @@
     
     self.events = [[[Database sharedInstance] events] asLiveQuery];
     [self.events addObserver:self forKeyPath:@"rows" options:NSKeyValueObservingOptionNew context:nil];
+    [self.events start];
   }
   return self;
+}
+
+
+- (void)dealloc
+{
+  [self.events removeObserver:self forKeyPath:@"rows"];
 }
 
 
