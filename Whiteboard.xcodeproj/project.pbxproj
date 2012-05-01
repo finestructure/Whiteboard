@@ -172,6 +172,7 @@
 		5AE26FE2154EE12800CA8E58 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE26FDC154EE12800CA8E58 /* Test.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5AE26FE5154EE48900CA8E58 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE26FE4154EE48800CA8E58 /* Security.framework */; };
 		5AE26FE7154EE49400CA8E58 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE26FE6154EE49400CA8E58 /* CFNetwork.framework */; };
+		5AE26FEA15503E8100CA8E58 /* EchoLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE26FE915503E8000CA8E58 /* EchoLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -523,6 +524,8 @@
 		5AE26FDC154EE12800CA8E58 /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Test.m; path = Vendor/MYUtilities/Test.m; sourceTree = "<group>"; };
 		5AE26FE4154EE48800CA8E58 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5AE26FE6154EE49400CA8E58 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5AE26FE815503E8000CA8E58 /* EchoLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EchoLayer.h; sourceTree = "<group>"; };
+		5AE26FE915503E8000CA8E58 /* EchoLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EchoLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,6 +633,8 @@
 				5A130CB4154ACFDD00A16684 /* LinePoint.m */,
 				5A130CDF154AED5100A16684 /* Replay.h */,
 				5A130CE0154AED5100A16684 /* Replay.m */,
+				5AE26FE815503E8000CA8E58 /* EchoLayer.h */,
+				5AE26FE915503E8000CA8E58 /* EchoLayer.m */,
 				5A130CAC154ACD4100A16684 /* CCRenderTextureWithDepth.h */,
 				5A130CAD154ACD4100A16684 /* CCRenderTextureWithDepth.m */,
 			);
@@ -1409,6 +1414,7 @@
 				5AE26FB4154EDDF000CA8E58 /* DispatchQueueLogFormatter.m in Sources */,
 				5AE26FDF154EE12800CA8E58 /* Logging.m in Sources */,
 				5AE26FE2154EE12800CA8E58 /* Test.m in Sources */,
+				5AE26FEA15503E8100CA8E58 /* EchoLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
