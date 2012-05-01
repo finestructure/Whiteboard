@@ -25,8 +25,6 @@
 
 #import "WhiteboardLayer.h"
 
-@class CCScene;
-
 @interface Replay : WhiteboardLayer
 
 @end
