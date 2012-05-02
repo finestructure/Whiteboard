@@ -31,6 +31,8 @@
 
 @implementation Database
 
+@synthesize database = _database;
+
 
 + (id)sharedInstance {
   static dispatch_once_t onceQueue;
@@ -38,22 +40,6 @@
   
   dispatch_once(&onceQueue, ^{ database = [[self alloc] init]; });
   return database;
-}
-
-
-- (CouchDatabase *)database {
-  if (_database) {
-    return _database;
-  } else {
-    NSError *error = nil;
-    BOOL connected = [self connect:&error];
-    if (! connected) {
-      NSLog(@"Connecting to database failed: %@", [error localizedDescription]);
-      return nil;
-    } else {
-      return _database;
-    }
-  }
 }
 
 
@@ -84,29 +70,55 @@
       }
       return NO;
     }
+
+    _database = [server databaseNamed:conf.localDbname];
+    
+    NSError *error = nil;
+    if ([_database ensureCreated:&error]) {
+//      [self updateSyncURL:nil];
+    } else {
+      if (outError != nil) {
+        *outError = server.error;
+      }
+      return NO;
+    }
+
+    [server tellTDServer:^(TDServer *tdServer) {
+      NSLog(@"Starting listener");
+      _listener = [[TDListener alloc] initWithTDServer:tdServer port:59840]; 
+      [_listener start];
+    }];
+
+/*    
+    __block BOOL created = YES;
+    
     [server tellTDServer:^(TDServer *tdServer) {
       [tdServer tellDatabaseNamed:conf.localDbname to:^(TDDatabase *db) {
         NSError *error = nil;
         [db deleteDatabase:&error];
+        
+        _database = [server databaseNamed:conf.localDbname];
+
+        if ([_database ensureCreated:&error]) {
+          [self updateSyncURL:nil];
+        } else {
+          if (outError != nil) {
+            *outError = server.error;
+          }
+          created = NO;
+        }
+        
+        NSLog(@"Starting listener");
+        _listener = [[TDListener alloc] initWithTDServer:tdServer port:59840]; 
+        [_listener start];
       }];
     }];
-    
-    __block BOOL created = YES;
-    [server tellTDServer:^(TDServer *tdServer) {
-      _database = [server databaseNamed:conf.localDbname];
-      NSError *error;
-      if (![_database ensureCreated:&error]) {
-        if (outError != nil) {
-          *outError = server.error;
-        }
-        created = NO;
-      }
-    }];
-    if (! created) {
-      return NO;
-    }
+ if (! created) {
+ return NO;
+ }
+ */   
+ 
   }
-  [self updateSyncURL:nil];
   return YES;
 }
 
@@ -137,11 +149,11 @@
   if (url == nil) {
     Configuration *conf = [[Globals sharedInstance] currentConfiguration];
     NSLog(@"configuration: %@", conf.displayName);
-    NSLog(@"remote URL: %@", conf.remoteUrl);
     newRemoteURL = [NSURL URLWithString:conf.remoteUrl];
   } else {
     newRemoteURL = [NSURL URLWithString:url];
   }
+  NSLog(@"remote URL: %@", newRemoteURL);
   
   if (newRemoteURL) {
     [self forgetSync];
@@ -204,23 +216,6 @@ static NSString* GetServerPath() {
 
 - (void)listen
 {
-  if (_listener) {
-    [_listener stop];
-  }
-  
-  NSError* error;
-  TDServer* server = [[TDServer alloc] initWithDirectory: GetServerPath() error: &error];
-  if (error) {
-    NSLog(@"FATAL: Error initializing TouchDB: %@", error);
-    return;
-  }
-  
-  int kPortNumber = 59840;
-  
-  _listener = [[TDListener alloc] initWithTDServer: server port:kPortNumber];
-  [_listener start];
-  
-  NSLog(@"TouchServ %@ is listening on port %d ... relax!", [TDRouter versionString], kPortNumber);
 }
 
 
