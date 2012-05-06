@@ -14,7 +14,7 @@
 #import <CouchCocoa/CouchCocoa.h>
 #import <CouchCocoa/CouchTouchDBServer.h>
 #import <CouchCocoa/CouchDesignDocument_Embedded.h>
-#import "TDListener.h"
+#import <TouchDBListener/TDListener.h>
 #import <TouchDB/TDServer.h>
 #import <TouchDB/TDRouter.h>
 #import <TouchDB/TDDatabase.h>
