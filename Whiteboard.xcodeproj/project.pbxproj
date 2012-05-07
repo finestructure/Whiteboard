@@ -430,6 +430,7 @@
 		5A130D83154DB8BF00A16684 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		5A130D84154DB8BF00A16684 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5A130D85154DB8BF00A16684 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		5A190DBE1557DE6900644717 /* TDDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDDatabaseManager.h; path = Vendor/TouchDB/Source/TDDatabaseManager.h; sourceTree = "<group>"; };
 		5A240705154EB02C00B811CD /* BonjourBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonjourBrowser.h; sourceTree = "<group>"; };
 		5A240706154EB02C00B811CD /* BonjourBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonjourBrowser.m; sourceTree = "<group>"; };
 		5A240707154EB02C00B811CD /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
@@ -595,6 +596,7 @@
 		5A1305A21548482A00A16684 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5A190DBE1557DE6900644717 /* TDDatabaseManager.h */,
 				5A240704154EB02C00B811CD /* BonjourSupport */,
 				5A130B5D154A9E2C00A16684 /* cocos2d */,
 				5A130C1B154A9E2C00A16684 /* CocosDenshion */,

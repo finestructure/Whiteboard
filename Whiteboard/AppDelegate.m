@@ -57,12 +57,7 @@
   
   [self.window makeKeyAndVisible];
   
-  NSError *error = nil;
-  if (! [[Database sharedInstance] connect:&error]) {
-    NSLog(@"Failed to connect to database: %@", [error localizedDescription]);
-  }
-  
-  [[Database sharedInstance] listen];
+  [[Database sharedInstance] connect];
   
   UIDevice *device = [UIDevice currentDevice];
   Configuration *conf = [[Globals sharedInstance] currentConfiguration];

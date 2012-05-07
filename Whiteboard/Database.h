@@ -17,13 +17,13 @@
 @interface Database : NSObject
 
 @property (readonly) CouchDatabase *database;
+@property (readonly, assign) BOOL connected;
 
 + (Database *)sharedInstance;
-- (BOOL)connect:(NSError **)outError;
+- (void)connect;
 - (void)disconnect;
 - (CouchDesignDocument *)designDocumentWithName:(NSString *)name;
 - (void)updateSyncURL:(NSString *)url;
-- (void)listen;
 
 - (CouchQuery *)events;
 

@@ -18,6 +18,7 @@
 #import <TouchDB/TDServer.h>
 #import <TouchDB/TDRouter.h>
 #import <TouchDB/TDDatabase.h>
+#import "TDDatabaseManager.h"
 
 
 @interface Database () {
@@ -32,6 +33,7 @@
 @implementation Database
 
 @synthesize database = _database;
+@synthesize connected = _connected;
 
 
 + (id)sharedInstance {
@@ -43,7 +45,8 @@
 }
 
 
-- (BOOL)connect:(NSError **)outError {
+- (void)connect {
+  NSLog(@"Connecting...");
   gCouchLogLevel = 1;
 
   Configuration *conf = [[Globals sharedInstance] currentConfiguration];
@@ -62,64 +65,45 @@
     [[NSURLCredentialStorage sharedCredentialStorage] setDefaultCredential:cred
                                                         forProtectionSpace:space];
   }
-  { // set up database
-    CouchTouchDBServer *server = [CouchTouchDBServer sharedInstance];
-    if (server.error) {
-      if (outError != nil) {
-        *outError = server.error;
-      }
-      return NO;
-    }
+  
+  // get server object
+  CouchTouchDBServer *server = [CouchTouchDBServer sharedInstance];
+  if (server.error) {
+    NSLog(@"Server error: %@", server.error.localizedDescription);
+    _connected = NO;
+    return;
+  }
 
-    _database = [server databaseNamed:conf.localDbname];
-    
-    NSError *error = nil;
-    if ([_database ensureCreated:&error]) {
-//      [self updateSyncURL:nil];
-    } else {
-      if (outError != nil) {
-        *outError = server.error;
+  // delete and recreate existing db
+  [server tellTDServer:^(TDServer *tdServer) {
+    [tdServer tellDatabaseManager:^(TDDatabaseManager *manager) {
+      BOOL deleted = [manager deleteDatabaseNamed:conf.localDbname];
+      if (deleted) {
+        NSLog(@"it's gone");
+      } else {
+        NSLog(@"there was none");
       }
-      return NO;
-    }
-
-    [server tellTDServer:^(TDServer *tdServer) {
+      
+      _database = [server databaseNamed:conf.localDbname];
+      RESTOperation *op = [_database create];
+      [op onCompletion:^{
+        if (op.error) {
+          NSLog(@"Error while creating db: %@", [op.error localizedDescription]);
+          _connected = NO;
+        } else {
+          NSLog(@"Created DB");
+          _connected = YES;
+        }
+      }];
+    }];
+  }];
+  
+  // start listener
+  [server tellTDServer:^(TDServer *tdServer) {
       NSLog(@"Starting listener");
       _listener = [[TDListener alloc] initWithTDServer:tdServer port:59840]; 
       [_listener start];
-    }];
-
-/*    
-    __block BOOL created = YES;
-    
-    [server tellTDServer:^(TDServer *tdServer) {
-      [tdServer tellDatabaseNamed:conf.localDbname to:^(TDDatabase *db) {
-        NSError *error = nil;
-        [db deleteDatabase:&error];
-        
-        _database = [server databaseNamed:conf.localDbname];
-
-        if ([_database ensureCreated:&error]) {
-          [self updateSyncURL:nil];
-        } else {
-          if (outError != nil) {
-            *outError = server.error;
-          }
-          created = NO;
-        }
-        
-        NSLog(@"Starting listener");
-        _listener = [[TDListener alloc] initWithTDServer:tdServer port:59840]; 
-        [_listener start];
-      }];
-    }];
- if (! created) {
- return NO;
- }
- */   
- 
-  }
-  return YES;
+  }];
 }
 
 
@@ -211,11 +195,6 @@ static NSString* GetServerPath() {
     exit(1);
   }
   return path;
-}
-
-
-- (void)listen
-{
 }
 
 
