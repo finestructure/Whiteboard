@@ -100,6 +100,7 @@ Copyright (C) 2010 Apple Inc. All Rights Reserved.
 		self.dvc = dvc;
 		[self.dvc setDelegate:self];
 		[self.dvc searchForBrowsableDomains]; // Tells the DomainViewController's NSNetServiceBrowser to start a search for domains that are browsable via Bonjour and the computer's network configuration.
+    self.dvc.contentSizeForViewInPopover = CGSizeMake(300, 500);
 
 		if ([domain length]) {
 			self.domain = domain;
@@ -173,6 +174,8 @@ Copyright (C) 2010 Apple Inc. All Rights Reserved.
 	self.bvc = aBvc;
 	if (self.showTitleInNavigationBar)
 		self.bvc.navigationItem.prompt = self.title;
+
+  self.bvc.contentSizeForViewInPopover = CGSizeMake(300, 500);
 }
 
 // This method will be invoked when the user selects one of the domains from the list.
